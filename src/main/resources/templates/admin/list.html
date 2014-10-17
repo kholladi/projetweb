@@ -22,27 +22,7 @@
 <div class="container">
  
       <!-- Static navbar -->
-      <div class="navbar navbar-default" role="navigation">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Caisse en ligne</a>
-          </div>
-          <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="#">Gestion de produits</a></li>
-              <li><a href="#">Historiques Clients</a></li>
-              <li><a href="#">gestion employés</a></li>
-              <li><a href="#">Caisse</a></li>
-            </ul>
-          </div><!--/.nav-collapse -->
-        </div><!--/.container-fluid -->
-      </div>
+  		<div th:include="/admin/header :: header"></div>
 
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
@@ -67,15 +47,22 @@
       <td  th:text="${produits.nom}"></td>
       <td th:text="${produits.categorie}"></td>
        <td th:text="${produits.prix}"></td>
-      <td > <span><a th:href="@{/edit(id=${produits.id})}">edit</a></span> </td>
-	  <td > <span><a th:href="@{/delete(id=${produits.id})}">delete</a></span>  </td>
+      <td > <span class="label label-important"><a th:href="@{/edit(id=${produits.id})}">edit</a></span> </td>
+	  <td > <span class="label label-important"><a th:href="@{/delete(id=${produits.id})}">delete</a></span>  </td>
     </tr>
   </tbody>
 </table>
 </div>
+       <ul class="nav nav-pills">
+  			<li class="active"><a href="/accueil">Retour</a></li>
+		</ul>
 
       </div>
-    </div>
+      
+     <!-- pied de page -->
+    <div th:include="/admin/footer :: footer"></div>
+    
+ </div>
     
 <!-- /container -->
 <!--Bootstrap core JavaScript-->

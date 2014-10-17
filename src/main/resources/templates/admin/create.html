@@ -4,9 +4,24 @@
     <title>produits</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+<style type="text/css">
+    .bs-example{
+    	margin: 20px;
+    }
+</style>
+
 </head>
 <body>
 
+<div class="container">
+ 
+      <!-- Static navbar -->
+  		<div th:include="/admin/header :: header"></div>
 
     <div  th:switch="${produits.id}">
     <form  action="#" th:object="${produits}" method="post">
@@ -27,7 +42,20 @@
 </div>
 
 
+  <!-- pied de page -->
+  <div th:include="/admin/footer :: footer"></div>
 
+</div>
+
+
+
+<!-- /container -->
+<!--Bootstrap core JavaScript-->
+<!--Placed at the end of the document so the pages lo…-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="../../dist/js/bootstrap.min.js"></script>
+<!--IE10 viewport hack for Surface/desktop Windows 8 …-->
+<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 
 </body>
 </html>
