@@ -20,29 +20,16 @@ public class ProduitsController {
 	
 	@RequestMapping(value = "/accueil", method = RequestMethod.GET)
 	public String accueil(Model model) {
-		model.addAttribute("produits", new Produits());
+		//model.addAttribute("produits", new Produits());
 		return "/admin/accueil";
-	}
-	
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String accueiladmin(Model model) {
-		model.addAttribute("produits", new Produits());
-		return "/admin/list";
-	}
-
-	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public String createForm(Model model) {
-		model.addAttribute("produits", new Produits());
-		return "/admin/create";
 	}
 	
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String submitForm(@ModelAttribute Produits Produits, Model model) {
 		
 		ProduitsRepository.save(Produits);
-		return "redirect:/admin/list";
+		return "redirect:/";
 	}
-	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String listProducts(Model model) {
 		
@@ -50,12 +37,24 @@ public class ProduitsController {
 		return "/admin/list";
 	}
 	
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public String submitForme( Model model) {
+		model.addAttribute("produits", new Produits());
+		
+		return "/admin/create";
+	}
+
+	
+	
+	
+	
+	
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public String deleteProduct(@RequestParam("id") Long id, Model model) {
 		
 		ProduitsRepository.delete(id);
 		
-		return "redirect:/admin/list";
+		return "redirect:/";
 	}
 	
 	
@@ -64,13 +63,13 @@ public class ProduitsController {
 	public String editForm(@RequestParam("id") Long id, Model model) {
 		
 		model.addAttribute("produits", ProduitsRepository.findOne(id));
-		return "/admin/list";
+		return "/admin/create";
 	}
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	public String editPost(@ModelAttribute Produits Produits, Model model) {
 		ProduitsRepository.save(Produits);
-		return "redirect:/list";
+		return "redirect:/";
 	}
 
 	
