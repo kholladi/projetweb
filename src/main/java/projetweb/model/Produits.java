@@ -17,14 +17,24 @@ public class Produits implements Serializable {
     private String nom;
     private String categorie;
     private long prix;
+    private long quantite;
 
 	public Produits() {}
 
-    public Produits(String nom, String prenom, String adresse, String categorie, long prix) {
+    public Produits(String nom, String prenom, String adresse, String categorie, long prix, long quantite) {
         this.nom = nom;
         this.categorie = categorie;
         this.prix = prix;
+        this.quantite = quantite;
     }
+
+	public long getQuantite() {
+		return quantite;
+	}
+
+	public void setQuantite(long quantite) {
+		this.quantite = quantite;
+	}
 
 	public long getId() {
 		return id;

@@ -38,8 +38,10 @@
       <th>Nom</th>
        <th>categorie</th>
        <th>prix</th>
+       <th>Quantite</th>
       <th>Modifer</th>
       <th>Supprimer</th>
+      
     </tr>
   </thead>
   <tbody th:each="produits : ${produits}">
@@ -47,6 +49,7 @@
       <td  th:text="${produits.nom}"></td>
       <td th:text="${produits.categorie}"></td>
        <td th:text="${produits.prix}"></td>
+       <td th:text="${produits.quantite}"></td>
       <td > <span class="label label-important"><a th:href="@{/edit(id=${produits.id})}">edit</a></span> </td>
 	  <td > <span class="label label-important"><a th:href="@{/delete(id=${produits.id})}">delete</a></span>  </td>
     </tr>

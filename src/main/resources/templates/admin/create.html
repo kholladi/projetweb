@@ -27,17 +27,14 @@
     <form  action="#" th:object="${produits}" method="post">
   	  <h1  th:case="-1">Creation produits</h1>
 	  <h1  th:case="*">Editer un produits</h1>
-	  
+ 
         <input  type="text" autofocus="" required="" placeholder="Nom" th:field="*{nom}"></input>
         <input  type="text" id="inputEmail" required="" placeholder="Catégorie" th:field="*{categorie}"></input>
-         <input  type="text" id="inputEmail" required="" placeholder="prix" th:field="*{prix}"></input>
+        <input  type="text" id="inputEmail" required="" placeholder="prix" th:field="*{prix}"></input>
+        <input  type="text" autofocus="" required="" placeholder="Quantite" th:field="*{quantite}"></input>
         
-        <button   type="submit" value="Submit">
-            Submit
-        </button>
-        <button  type="reset" value="Reset">
-            Reset
-        </button>
+        <button   type="submit" value="Submit">Submit</button>
+        <button  type="reset" value="Reset">Reset</button>
     </form>
 </div>
 
