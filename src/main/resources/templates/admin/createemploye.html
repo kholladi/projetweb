@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>produits</title>
+    <title>employes</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
@@ -18,16 +18,34 @@
 </head>
 <body>
 
+
+<script type="text/javascript">
+window.onload = function () {
+    document.getElementById("password1").onchange = validatePassword;
+    document.getElementById("password2").onchange = validatePassword;
+}
+function validatePassword(){
+var pass2=document.getElementById("password2").value;
+var pass1=document.getElementById("password1").value;
+if(pass1!=pass2)
+    document.getElementById("password2").setCustomValidity("Passwords Don't Match");
+else
+    document.getElementById("password2").setCustomValidity(''); 
+//empty string means no validation error
+}
+</script>
+
+
 <div class="container">
  
       <!-- Static navbar -->
   		<div th:include="/admin/header :: header"></div>
   		
  <!-- 
-     <div  th:switch="${produits.id}">
-    <form  action="#" th:object="${produits}" method="post">
-  	  <h1  th:case="-1">Creation produits</h1>
-	  <h1  th:case="*">Editer un produits</h1>
+     <div  th:switch="${employes.id}">
+    <form  action="#" th:object="${employes}" method="post">
+  	  <h1  th:case="-1">Creation employes</h1>
+	  <h1  th:case="*">Editer un employes</h1>
  
         <input  type="text" autofocus="" required="" placeholder="Nom" th:field="*{nom}"></input>
         <input  type="text" id="inputEmail" required="" placeholder="Catégorie" th:field="*{categorie}"></input>
@@ -39,45 +57,82 @@
     </form>
 </div>   --> 		
 
-<div  th:switch="${produits.id}">
-<form action="#" th:object="${produits}" method="post" class="form-horizontal">
+<div  th:switch="${employes.id}">
+<form action="#" th:object="${employes}" method="post" class="form-horizontal">
 <fieldset>
 <!-- Form Name -->
-  	  <legend  th:case="-1">Creation produits</legend>
-	  <legend  th:case="*">Editer un produits</legend>
+  	  <legend  th:case="-1">Creation employes</legend>
+	  <legend  th:case="*">Editer un employes</legend>
+
+<!-- Multiple Radios -->
+<div class="control-group">
+  <label class="control-label" for="radios">Civilite</label>
+  <div class="controls">
+    <label class="radio" for="radios-0">
+      <input name="radios" id="radios-0" value="Homme" checked="checked" type="radio" th:field="*{civilite}">
+      Homme
+    </label>
+    <label class="radio" for="radios-1">
+      <input name="radios" id="radios-1" value="Femme" type="radio" th:field="*{civilite}">
+      Femme
+    </label>
+  </div>
+</div>
+
 
 <!-- Text input-->
 <div class="control-group">
   <label class="control-label" for="nom">nom</label>
   <div class="controls">
-    <input id="nom" name="nom" placeholder="nom" class="input-xlarge" required="" type="text" th:field="*{nom}"/>
-    
+    <input id="nom" name="nom" placeholder="nom" class="input-xlarge" required="" type="text" th:field="*{nom}"/>  
   </div>
 </div>
 
 <!-- Text input-->
 <div class="control-group">
-  <label class="control-label" for="categorie">categorie</label>
+  <label class="control-label" for="categorie">prenom</label>
   <div class="controls">
-    <input id="categorie" name="categorie" placeholder="categorie" class="input-xlarge" required="" type="text" th:field="*{categorie}"/>   
+    <input id="prenom" name="prenom" placeholder="prenom" class="input-xlarge" required="" type="text" th:field="*{prenom}"/>
   </div>
 </div>
 
 <!-- Text input-->
 <div class="control-group">
-  <label class="control-label" for="prix">prix</label>
+  <label class="control-label" for="prix">adresse</label>
   <div class="controls">
- <p><input id="prix" name="prix" placeholder="prix" class="input-xlarge" required="" type="number" th:field="*{prix}"/>
-	€
-	</p>
+    <input id="adresse" name="adresse" placeholder="adresse" class="input-xlarge" required="" type="text" th:field="*{adresse}"/>
   </div>
 </div>
+
 <!-- Text input-->
 <div class="control-group">
-  <label class="control-label" for="quantite">quantite</label>
+  <label class="control-label" for="quantite">Tel</label>
   <div class="controls">
-    <input id="quantite" name="quantite" placeholder="quantite" class="input-xlarge" required="" type="number" th:field="*{quantite}"/>
-    
+    <input id="numero" name="numero" placeholder="numero" class="input-xlarge" required="" type="tel" th:field="*{numero}"/>
+    </div>
+  </div>
+  
+  <!-- Text input-->
+<div class="control-group">
+  <label class="control-label" for="quantite">E-mail</label>
+  <div class="controls">
+    <input id="mail" name="mail" placeholder="mail" class="input-xlarge" required="" type="email" th:field="*{mail}"/>
+  </div>
+</div>
+
+  <!-- Text input-->
+<div class="control-group">
+  <label class="control-label" for="quantite">Mot de passe</label>
+  <div class="controls">
+    <input id="password1" name="mdp" placeholder="mdp" class="input-xlarge" required="" type="password"/>
+  </div>
+</div>
+
+  <!-- Text input-->
+<div class="control-group">
+  <label class="control-label" for="quantite">Confirmation Mot de passe</label>
+  <div class="controls">
+    <input id="password2" name="mdp" placeholder="Confirmation mdp" class="input-xlarge" required="" type="password" th:field="*{mdp}"/>
   </div>
 </div>
 
@@ -89,6 +144,8 @@
     <button id="reset" name="reset" class="btn btn-danger" type="reset" value="Reset">Annuler</button>
   </div>
 </div>
+
+
 </fieldset>
 </form>
 </div>
@@ -110,6 +167,8 @@
 <script src="../../dist/js/bootstrap.min.js"></script>
 <!--IE10 viewport hack for Surface/desktop Windows 8 …-->
 <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+
+
 
 </body>
 </html>

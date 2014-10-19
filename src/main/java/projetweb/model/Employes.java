@@ -14,6 +14,7 @@ public class Employes implements Serializable {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id = -1;
     
+    private boolean civilite;
     private String nom;
     private String prenom;
     private String adresse;
@@ -26,15 +27,14 @@ public class Employes implements Serializable {
 
 
 	public Employes(long id, String nom, String prenom, String adresse,
-			String numero, String mail, String mdp) {
-		super();
-		this.id = id;
+			String numero, String mail, String mdp, boolean civilite) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.adresse = adresse;
 		this.numero = numero;
 		this.mail = mail;
 		this.mdp = mdp;
+		this.civilite = civilite;
 	}
 
 
@@ -105,6 +105,16 @@ public class Employes implements Serializable {
 
 	public void setMdp(String mdp) {
 		this.mdp = mdp;
+	}
+
+
+	public boolean isCivilite() {
+		return civilite;
+	}
+
+
+	public void setCivilite(boolean civilite) {
+		this.civilite = civilite;
 	}
 
 
