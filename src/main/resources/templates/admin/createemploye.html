@@ -65,6 +65,20 @@ else
 	  <legend  th:case="*">Editer un employes</legend>
 
 
+<!-- Multiple Radios (inline) -->
+<div class="control-group">
+  <label class="control-label" for="radios">Civilite</label>
+  <div class="controls">
+    <label class="radio inline" for="radios-0">
+      <input name="radios" id="radios-0" value="H" checked="checked" type="radio" th:field="*{civilite}"/>
+      H
+    </label>
+    <label class="radio inline" for="radios-1">
+      <input name="radios" id="radios-1" value="F" type="radio" th:field="*{civilite}"/>
+      F
+    </label>
+  </div>
+</div>
 
 
 <!-- Text input-->
@@ -111,7 +125,7 @@ else
 <div class="control-group">
   <label class="control-label" for="quantite">Mot de passe</label>
   <div class="controls">
-    <input id="password1" name="mdp" placeholder="mdp" class="input-xlarge" required="" type="password"/>
+    <input id="password1" name="mdp" placeholder="mdp" class="input-xlarge" required="" type="password" th:field="*{mdp}"/>
   </div>
 </div>
 
@@ -119,7 +133,7 @@ else
 <div class="control-group">
   <label class="control-label" for="quantite">Confirmation Mot de passe</label>
   <div class="controls">
-    <input id="password2" name="mdp" placeholder="Confirmation mdp" class="input-xlarge" required="" type="password" th:field="*{mdp}"/>
+    <input id="password2" name="mdp1" placeholder="Confirmation mdp" class="input-xlarge" required="" type="password"/>
   </div>
 </div>
 

@@ -28,13 +28,13 @@ public class EmployesController {
 	@RequestMapping(value = "/employes", method = RequestMethod.GET)
 	public String listemployeemploye(Model model) {
 		
-		model.addAttribute("Employes", EmployesRepository.findAll());
+		model.addAttribute("employes", EmployesRepository.findAll());
 		return "/admin/listemploye";
 	}
 	
 	@RequestMapping(value = "/createemploye", method = RequestMethod.GET)
 	public String submitFormeemploye( Model model) {
-		model.addAttribute("Employes", new Employes());
+		model.addAttribute("employes", new Employes());
 		
 		return "/admin/createemploye";
 	}
@@ -57,7 +57,7 @@ public class EmployesController {
 	@RequestMapping(value = "/editemploye", method = RequestMethod.GET)
 	public String editFormemploye(@RequestParam("id") Long id, Model model) {
 		
-		model.addAttribute("Employes", EmployesRepository.findOne(id));
+		model.addAttribute("employes", EmployesRepository.findOne(id));
 		return "/admin/createemploye";
 	}
 	
