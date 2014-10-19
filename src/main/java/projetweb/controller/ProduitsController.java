@@ -28,9 +28,9 @@ public class ProduitsController {
 	public String submitForm(@ModelAttribute Produits Produits, Model model) {
 		
 		ProduitsRepository.save(Produits);
-		return "redirect:/";
+		return "redirect:/prod";
 	}
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/prod", method = RequestMethod.GET)
 	public String listProducts(Model model) {
 		
 		model.addAttribute("produits", ProduitsRepository.findAll());
@@ -54,7 +54,7 @@ public class ProduitsController {
 		
 		ProduitsRepository.delete(id);
 		
-		return "redirect:/";
+		return "redirect:/prod";
 	}
 	
 	
@@ -69,7 +69,7 @@ public class ProduitsController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	public String editPost(@ModelAttribute Produits Produits, Model model) {
 		ProduitsRepository.save(Produits);
-		return "redirect:/";
+		return "redirect:/prod";
 	}
 
 	
