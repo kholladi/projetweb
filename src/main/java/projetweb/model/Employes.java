@@ -14,7 +14,7 @@ public class Employes implements Serializable {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id = -1;
     
-    private boolean civilite;
+    private String civilite;
     private String nom;
     private String prenom;
     private String adresse;
@@ -27,7 +27,7 @@ public class Employes implements Serializable {
 
 
 	public Employes(long id, String nom, String prenom, String adresse,
-			String numero, String mail, String mdp, boolean civilite) {
+			String numero, String mail, String mdp, String civilite) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.adresse = adresse;
@@ -108,14 +108,16 @@ public class Employes implements Serializable {
 	}
 
 
-	public boolean isCivilite() {
+	public String getCivilite() {
 		return civilite;
 	}
 
 
-	public void setCivilite(boolean civilite) {
+	public void setCivilite(String civilite) {
 		this.civilite = civilite;
 	}
+
+
 
 
 	

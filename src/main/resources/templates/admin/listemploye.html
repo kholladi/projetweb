@@ -56,8 +56,8 @@
        <td th:text="${employes.numero}"></td>
         <td th:text="${employes.mail}"></td>
          <td th:text="${employes.mdp}"></td>
-      <td > <span class="label label-important"><a th:href="@{/edit(id=${employes.id})}">edit</a></span> </td>
-	  <td > <span class="label label-important"><a th:href="@{/delete(id=${employes.id})}">delete</a></span>  </td>
+      <td > <span class="label label-important"><a th:href="@{/editemploye(id=${employes.id})}">edit</a></span> </td>
+	  <td > <span class="label label-important"><a th:href="@{/deleteemploye(id=${employes.id})}">delete</a></span>  </td>
     </tr>
   </tbody>
 </table>
