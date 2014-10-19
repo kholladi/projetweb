@@ -24,24 +24,24 @@ public class EmployesController {
 		return "/admin/accueil";
 	}
 	
-	@RequestMapping(value = "/create", method = RequestMethod.POST)
+	@RequestMapping(value = "/createemploye", method = RequestMethod.POST)
 	public String submitForm(@ModelAttribute Employes Employes, Model model) {
 		
 		EmployesRepository.save(Employes);
 		return "redirect:/";
 	}
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String listProducts(Model model) {
+	public String listemployeProducts(Model model) {
 		
 		model.addAttribute("Employes", EmployesRepository.findAll());
-		return "/admin/list";
+		return "/admin/listemploye";
 	}
 	
-	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	@RequestMapping(value = "/createemploye", method = RequestMethod.GET)
 	public String submitForme( Model model) {
 		model.addAttribute("Employes", new Employes());
 		
-		return "/admin/create";
+		return "/admin/createemploye";
 	}
 
 	
@@ -63,7 +63,7 @@ public class EmployesController {
 	public String editForm(@RequestParam("id") Long id, Model model) {
 		
 		model.addAttribute("Employes", EmployesRepository.findOne(id));
-		return "/admin/create";
+		return "/admin/createemploye";
 	}
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
