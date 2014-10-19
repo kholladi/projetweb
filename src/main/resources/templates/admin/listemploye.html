@@ -28,30 +28,36 @@
       <div class="jumbotron">
       
        <ul class="nav nav-pills">
-  			<li class="active"><a href="/create">Ajouter un nouveau produits</a></li>
+  			<li class="active"><a href="/create">Ajouter un nouveau employes</a></li>
 		</ul>
 		
  <div class="bs-example">
     <table class="table table-hover">
   <thead>
     <tr>
-      <th>Nom</th>
-       <th>categorie</th>
-       <th>prix</th>
-       <th>Quantite</th>
+      <th>Civilite</th>
+       <th>Nom</th>
+       <th>Prenom</th>
+       <th>Adresse</th>
+       <th>Numero</th>
+       <th>E-mail</th>
+       <th>Mot de passe</th>
       <th>Modifer</th>
       <th>Supprimer</th>
       
     </tr>
   </thead>
-  <tbody th:each="produits : ${produits}">
+  <tbody th:each="employes : ${employes}">
     <tr>
-      <td  th:text="${produits.nom}"></td>
-      <td th:text="${produits.categorie}"></td>
-       <td th:text="${produits.prix}"></td>
-       <td th:text="${produits.quantite}"></td>
-      <td > <span class="label label-important"><a th:href="@{/edit(id=${produits.id})}">edit</a></span> </td>
-	  <td > <span class="label label-important"><a th:href="@{/delete(id=${produits.id})}">delete</a></span>  </td>
+     <td th:text="${employes.civilite}"></td>
+      <td  th:text="${employes.nom}"></td>
+      <td th:text="${employes.prenom}"></td>
+       <td th:text="${employes.adresse}"></td>
+       <td th:text="${employes.numero}"></td>
+        <td th:text="${employes.mail}"></td>
+         <td th:text="${employes.mdp}"></td>
+      <td > <span class="label label-important"><a th:href="@{/edit(id=${employes.id})}">edit</a></span> </td>
+	  <td > <span class="label label-important"><a th:href="@{/delete(id=${employes.id})}">delete</a></span>  </td>
     </tr>
   </tbody>
 </table>
