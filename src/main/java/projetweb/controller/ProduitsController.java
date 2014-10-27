@@ -23,7 +23,11 @@ public class ProduitsController {
 		//model.addAttribute("produits", new Produits());
 		return "/admin/accueil";
 	}
-	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login(Model model) {
+		//model.addAttribute("produits", new Produits());
+		return "/admin/login";
+	}
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String submitForm(@ModelAttribute Produits Produits, Model model) {
 		

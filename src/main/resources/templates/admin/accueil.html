@@ -19,9 +19,13 @@
 <div class="container">
 
       <!-- Static navbar -->
-	 <div th:include="/admin/header :: header"></div>
+      <div th:if=" ${#httpServletRequest.remoteUser} == null"  th:include="/admin/header :: header">
+         
+         </div>
 
-
+         <div th:if=" ${#httpServletRequest.remoteUser} != null" th:include="/admin/header_adm :: header_adm">
+       
+         </div>
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
         <h1>Caisse en ligne</h1>
