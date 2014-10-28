@@ -12,13 +12,13 @@ import org.springframework.security.config.annotation.web.servlet.configuration.
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/", "/accueil").permitAll()
+		http.authorizeRequests().antMatchers("/").permitAll()
 				.anyRequest().authenticated();
 		http.csrf().disable();
 
 		http.formLogin().loginPage("/login").usernameParameter("login")
 				.passwordParameter("pwd").permitAll().and().logout()
-				.logoutUrl("/bye").logoutSuccessUrl("/accueil").permitAll();
+				.logoutUrl("/bye").logoutSuccessUrl("/login").permitAll();
 	}
 
 

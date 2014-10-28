@@ -3,10 +3,8 @@
 <head>
     <title>Accueil</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    
     <!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"></link>
-
 	<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"></link>
 </head>
@@ -19,13 +17,11 @@
 <div class="container">
 
       <!-- Static navbar -->
-      <div th:if=" ${#httpServletRequest.remoteUser} == null"  th:include="/admin/header :: header">
+      <div th:if=" ${#httpServletRequest.remoteUser} == null"  th:include="/admin/header :: header"></div>        
+      <div th:if=" ${#httpServletRequest.remoteUser} != null" th:include="/admin/header_adm :: header_adm"></div>   
+      
          
-         </div>
-
-         <div th:if=" ${#httpServletRequest.remoteUser} != null" th:include="/admin/header_adm :: header_adm">
-       
-         </div>
+         
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
         <h1>Caisse en ligne</h1>
