@@ -9,14 +9,14 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"></link>
 </head>
 
-<!-- Latest compiled and minified JavaScript -->
+<!--  Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
 <body>
 
 <div class="container">
 
-      <!-- Static navbar -->
+       <!-- Static navbar -->
       <div th:if=" ${#httpServletRequest.remoteUser} == null"  th:include="/admin/header :: header"></div>        
       <div th:if=" ${#httpServletRequest.remoteUser} != null" th:include="/admin/header_adm :: header_adm"></div>   
       

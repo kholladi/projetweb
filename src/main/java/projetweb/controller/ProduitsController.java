@@ -15,7 +15,7 @@ import projetweb.repository.ProduitsRepository;
 @Controller
 public class ProduitsController {
 
-	@Autowired
+	 @Autowired
 	private ProduitsRepository ProduitsRepository;
 	
 	@RequestMapping(value = "/accueil", method = RequestMethod.GET)
