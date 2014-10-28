@@ -23,6 +23,11 @@ public class ProduitsController {
 		//model.addAttribute("produits", new Produits());
 		return "/admin/accueil";
 	}
+	@RequestMapping(value = "/ac", method = RequestMethod.GET)
+	public String accueill(Model model) {
+		//model.addAttribute("produits", new Produits());
+		return "/admin/accueil";
+	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Model model) {

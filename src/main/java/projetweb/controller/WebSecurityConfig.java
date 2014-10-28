@@ -12,7 +12,7 @@ import org.springframework.security.config.annotation.web.servlet.configuration.
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/").permitAll()
+		http.authorizeRequests().antMatchers("/accueil").permitAll()
 				.anyRequest().authenticated();
 		http.csrf().disable();
 
