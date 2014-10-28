@@ -23,6 +23,19 @@ public class ProduitsController {
 		//model.addAttribute("produits", new Produits());
 		return "/admin/accueil";
 	}
+	
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String accueilr(Model model) {
+		//model.addAttribute("produits", new Produits());
+		return "/admin/accueil";
+	}
+	
+	@RequestMapping(value = "/accueilemploi", method = RequestMethod.GET)
+	public String accueilemploye(Model model) {
+		//model.addAttribute("produits", new Produits());
+		return "/accueil";
+	}
+	
 	@RequestMapping(value = "/ac", method = RequestMethod.GET)
 	public String accueill(Model model) {
 		//model.addAttribute("produits", new Produits());
@@ -33,6 +46,12 @@ public class ProduitsController {
 	public String login(Model model) {
 		//model.addAttribute("produits", new Produits());
 		return "/admin/login";
+	}
+	
+	@RequestMapping(value = "/loginemploi", method = RequestMethod.GET)
+	public String loginemploye(Model model) {
+		//model.addAttribute("produits", new Produits());
+		return "/login";
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
