@@ -18,7 +18,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.formLogin().loginPage("/login").usernameParameter("login")
 				.passwordParameter("pwd").permitAll().and().logout()
-				.logoutUrl("/bye").logoutSuccessUrl("/login").permitAll();
+				.logoutUrl("/bye").logoutSuccessUrl("/accueil");
 	}
 
 
