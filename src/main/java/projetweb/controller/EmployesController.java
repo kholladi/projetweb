@@ -67,5 +67,25 @@ public class EmployesController {
 		return "redirect:/employes";
 	}
 	
+	
+	
 //
+	@RequestMapping(value = "/loginemploi", method = RequestMethod.GET)
+	public String loginemploye(Model model) {
+		//model.addAttribute("produits", new Produits());
+		return "/login";
+	}	
+	
+	@RequestMapping(value = "/accueilemploi", method = RequestMethod.GET)
+	public String accueilemploye(Model model) {
+		//model.addAttribute("produits", new Produits());
+		return "/accueil";
+	}
+	
+	@RequestMapping(value = "/accueilemploi", method = RequestMethod.POST)
+	public String editPostemployepost(Model model) {
+
+		return "/accueil";
+	}
+	
 }
