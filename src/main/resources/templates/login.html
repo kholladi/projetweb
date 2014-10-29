@@ -37,12 +37,12 @@
             
             <ul class="nav navbar-nav navbar-right">
             <li>
-                   <form  action ="/accueilemploi" class="navbar-form navbar-right" role="form" method="post">
+                   <form action="/accueilemploi" th:object="${employes}" class="navbar-form navbar-right" role="form" method="post">
             <div class="form-group">
-              <input placeholder="Login" class="form-control" type="text" name="login"/>
+              <input placeholder="Login" class="form-control" type="text" name="login" th:field="*{nom}"/>
             </div>
             <div class="form-group">
-              <input placeholder="Password" class="form-control" type="password" name="pwd"/>
+              <input placeholder="Password" class="form-control" type="password" name="pwd" th:field="*{mdp}"/>
             </div>
             <button type="submit" class="btn btn-success">Sign in</button>
           </form>      

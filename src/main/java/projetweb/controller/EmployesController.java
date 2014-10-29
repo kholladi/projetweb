@@ -1,5 +1,8 @@
 package projetweb.controller;
 
+import javax.validation.Valid;
+
+import org.hibernate.metamodel.relational.Size;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +20,7 @@ public class EmployesController {
 
 	@Autowired
 	private EmployesRepository EmployesRepository;
+	
 	
 	
 	@RequestMapping(value = "/createemploye", method = RequestMethod.POST)
@@ -72,9 +76,36 @@ public class EmployesController {
 //
 	@RequestMapping(value = "/loginemploi", method = RequestMethod.GET)
 	public String loginemploye(Model model) {
-		//model.addAttribute("produits", new Produits());
+
+	//	model.addAttribute("employes", new Employes());
+		
 		return "/login";
 	}	
+	
+	@RequestMapping(value = "/accueilemploi", method = RequestMethod.POST)
+	public String editPostemployepost(@ModelAttribute Employes employes, Model model) {
+
+		Iterable<Employes> listemploi = EmployesRepository.findAll();
+	
+		
+		for (Employes emploi : listemploi) {
+            System.out.println(emploi.getNom()); // list de tous les employes
+            
+            if(employes.getNom() != emploi.getNom() ){
+            	
+            	return "/login";
+            }       
+        }
+		System.out.println(employes.getNom());
+		return "/accueil";
+		
+		 
+		
+
+		
+		
+		
+	}
 	
 	@RequestMapping(value = "/accueilemploi", method = RequestMethod.GET)
 	public String accueilemploye(Model model) {
@@ -82,10 +113,5 @@ public class EmployesController {
 		return "/accueil";
 	}
 	
-	@RequestMapping(value = "/accueilemploi", method = RequestMethod.POST)
-	public String editPostemployepost(Model model) {
-
-		return "/accueil";
-	}
 	
 }
