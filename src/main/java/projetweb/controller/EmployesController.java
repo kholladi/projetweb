@@ -77,7 +77,7 @@ public class EmployesController {
 	@RequestMapping(value = "/loginemploi", method = RequestMethod.GET)
 	public String loginemploye(Model model) {
 
-	//	model.addAttribute("employes", new Employes());
+	model.addAttribute("employes", new Employes());
 		
 		return "/login";
 	}	
