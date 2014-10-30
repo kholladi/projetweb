@@ -1,5 +1,7 @@
 package projetweb.controller;
 
+import java.util.ArrayList;
+
 import javax.validation.Valid;
 
 import org.hibernate.metamodel.relational.Size;
@@ -76,40 +78,54 @@ public class EmployesController {
 //
 	@RequestMapping(value = "/loginemploi", method = RequestMethod.GET)
 	public String loginemploye(Model model) {
-
-	model.addAttribute("employes", new Employes());
+		//model.addAttribute("produits", new Produits());
+		model.addAttribute("employes", new Employes());
 		
 		return "/login";
 	}	
 	
-	@RequestMapping(value = "/accueilemploi", method = RequestMethod.POST)
+	@RequestMapping(value = "/loginemploi", method = RequestMethod.POST)
 	public String editPostemployepost(@ModelAttribute Employes employes, Model model) {
-
-		Iterable<Employes> listemploi = EmployesRepository.findAll();
+boolean exist=false;
+		ArrayList<Employes> listemploi = (ArrayList<Employes>) EmployesRepository.findAll();
+		int sizeListe=listemploi.size();
+		int i=0;
+		while(i<sizeListe && exist==false){
+		//for(int i=0;i<sizeListe;i++){
+			// System.out.println(employes.getNom());
+			  // System.out.println(listemploi.get(i).getNom());
+			   if(employes.getNom().equals(listemploi.get(i).getNom())  ){
+				   System.out.println(employes.getNom());
+				   System.out.println(listemploi.get(i).getNom());
+	        		model.addAttribute("employes", employes.getNom());
+	            	exist=true;
+	            
+	            }
+			   
+				i++;
+		}
+		System.out.println(exist);
 	
-		
-		for (Employes emploi : listemploi) {
+	if(exist==true)
+		return "/accueil";
+	else 
+		return "/login";
+	}
+		/*for (Employes emploi : listemploi) {
             System.out.println(emploi.getNom()); // list de tous les employes
             
-            if(employes.getNom() != emploi.getNom() ){
-            	
-            	return "/login";
-            }       
-        }
-		System.out.println(employes.getNom());
-		return "/accueil";
-		
-		 
-		
+            if(employes.getNom() == emploi.getNom() ){
+        		model.addAttribute("employes", emploi.getNom());
+            	return "/accueil";
+            }
+*/
+            
 
-		
-		
-		
-	}
 	
 	@RequestMapping(value = "/accueilemploi", method = RequestMethod.GET)
 	public String accueilemploye(Model model) {
 		//model.addAttribute("produits", new Produits());
+		model.addAttribute("employes", new Employes());
 		return "/accueil";
 	}
 	

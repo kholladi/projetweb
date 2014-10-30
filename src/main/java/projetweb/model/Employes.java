@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Employes implements Serializable {
@@ -15,11 +16,13 @@ public class Employes implements Serializable {
     private long id = -1;
     
     private String civilite;
+    @NotNull
     private String nom;
     private String prenom;
     private String adresse;
     private String numero;
     private String mail;
+    @NotNull
     private String mdp;
     
     
