@@ -93,5 +93,15 @@ public class ProduitsController {
 	}
 
 	
-//
+	@RequestMapping(value = "/caisse", method = RequestMethod.GET)
+	public String caisseemploye(Model model) {
+		model.addAttribute("prod", new Produits());
+		model.addAttribute("products", ProduitsRepository.findAll());	
+		
+		return "/caisse";
+	}	
+	
+
+
+
 }

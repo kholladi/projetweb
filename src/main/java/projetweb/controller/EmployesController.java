@@ -84,7 +84,7 @@ public class EmployesController {
 		return "/login";
 	}	
 	
-	@RequestMapping(value = "/loginemploi", method = RequestMethod.POST)
+	@RequestMapping(value = "/accueilemploi", method = RequestMethod.POST)
 	public String editPostemployepost(@ModelAttribute Employes employes, Model model) {
 boolean exist=false;
 		ArrayList<Employes> listemploi = (ArrayList<Employes>) EmployesRepository.findAll();
@@ -128,6 +128,7 @@ boolean exist=false;
 		model.addAttribute("employes", new Employes());
 		return "/accueil";
 	}
+	
 	
 	
 }
