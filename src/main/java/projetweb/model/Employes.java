@@ -29,7 +29,7 @@ public class Employes implements Serializable {
 	public Employes() {}
 
 
-	public Employes(long id, String nom, String prenom, String adresse,
+	public Employes(String nom, String prenom, String adresse,
 			String numero, String mail, String mdp, String civilite) {
 		this.nom = nom;
 		this.prenom = prenom;

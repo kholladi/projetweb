@@ -21,7 +21,7 @@ public class Produits implements Serializable {
 
 	public Produits() {}
 
-    public Produits(String nom, String prenom, String adresse, String categorie, long prix, long quantite) {
+    public Produits(String nom, String categorie, long prix, long quantite) {
         this.nom = nom;
         this.categorie = categorie;
         this.prix = prix;
