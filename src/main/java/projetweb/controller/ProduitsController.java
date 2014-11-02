@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import projetweb.model.Facture;
 import projetweb.model.Produits;
 import projetweb.repository.ProduitsRepository;
+
 
 
 @Controller
@@ -98,10 +100,11 @@ public class ProduitsController {
 		model.addAttribute("prod", new Produits());
 		model.addAttribute("products", ProduitsRepository.findAll());	
 		
+		model.addAttribute("factures", new Facture());
+		
 		return "/caisse";
 	}	
 	
-
 
 
 }
