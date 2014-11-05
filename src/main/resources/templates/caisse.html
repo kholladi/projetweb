@@ -82,7 +82,7 @@
   <tbody>
     <tr th:each="facture : ${facturess}">
       <td th:text="${facture.produit}"></td>
-       <td></td>
+       <td th:text="${facture.prix}"></td>
       <td> <input id="quantite" name="quantite" placeholder="quantite" class="input-xlarge" required="" type="number"/></td>
 	  <td > <span class="label label-important">delete</span>  </td>
     </tr>

@@ -100,19 +100,5 @@ public class ProduitsController {
 	}
 
 	
-	@RequestMapping(value = "/caisse", method = RequestMethod.GET)
-	public String caisseemploye(Model model) {
-		model.addAttribute("prod", new Produits());
-		model.addAttribute("products", ProduitsRepository.findAll());	
-		
-		model.addAttribute("facture", new Facture());
-		
-		
-		List<Facture> l = (List<Facture>) FactureRepository.findAll();
-		if (l != null && !l.isEmpty())
-			model.addAttribute("facturess", l);
-
-		return "caisse";
-	}	
 	
 }
