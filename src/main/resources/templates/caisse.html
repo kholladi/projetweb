@@ -30,7 +30,7 @@
 <div style="display:inline-block; width:30%;">
       <h3>Liste des produits</h3>
       
- <form action="#" th:action="@{/caisse}" th:object="${facture}" method="post" class="form-horizontal">
+ <form action="#" th:object="${facture}" method="post" class="form-horizontal">
    
     <select th:field="*{produit}" id="listeproduits" name="listeproduits" class="input-xlarge" multiple="multiple" style="width: 300px;height: 300px">
       <option th:each="produits : ${products}" 
@@ -79,9 +79,9 @@
       <th>supprimer</th>
     </tr>
   </thead>
-  <tbody th:each="facture : ${fact}">
-    <tr>
-      <td><span th:text="${facture.produit}"></span></td>
+  <tbody>
+    <tr th:each="facture : ${facturess}">
+      <td th:text="${facture.produit}"></td>
        <td></td>
       <td> <input id="quantite" name="quantite" placeholder="quantite" class="input-xlarge" required="" type="number"/></td>
 	  <td > <span class="label label-important">delete</span>  </td>

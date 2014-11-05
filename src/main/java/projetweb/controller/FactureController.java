@@ -27,16 +27,13 @@ public class FactureController {
 			
 			FactureRepository.save(facture);
 			
-
+			System.out.println(facture.getProduit());		
 			
-			System.out.println(facture.getProduit());
-			
-			model.addAttribute("facture", FactureRepository.findAll());
-
-		
+	
 			return "redirect:/caisse";
 		}
 		
+
 
 
 		

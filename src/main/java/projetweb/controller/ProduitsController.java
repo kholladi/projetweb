@@ -1,5 +1,7 @@
 package projetweb.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +22,8 @@ public class ProduitsController {
 
 	 @Autowired
 	private ProduitsRepository ProduitsRepository;
-	private FactureRepository FactureRepository;
+	 @Autowired
+	 private FactureRepository FactureRepository;
 	
 	@RequestMapping(value = "/accueil", method = RequestMethod.GET)
 	public String accueil(Model model) {
@@ -103,11 +106,13 @@ public class ProduitsController {
 		model.addAttribute("products", ProduitsRepository.findAll());	
 		
 		model.addAttribute("facture", new Facture());
-
 		
-		return "/caisse";
+		
+		List<Facture> l = (List<Facture>) FactureRepository.findAll();
+		if (l != null && !l.isEmpty())
+			model.addAttribute("facturess", l);
+
+		return "caisse";
 	}	
 	
-
-
 }
