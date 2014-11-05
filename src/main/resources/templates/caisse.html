@@ -30,13 +30,12 @@
 <div style="display:inline-block; width:30%;">
       <h3>Liste des produits</h3>
       
- <form action="#" th:action="@{/caisse}" th:object="${factures}" method="post" class="form-horizontal">
+ <form action="#" th:action="@{/caisse}" th:object="${facture}" method="post" class="form-horizontal">
    
-    <select  id="listeproduits" name="listeproduits" class="input-xlarge" multiple="multiple" style="width: 300px;height: 300px">
+    <select th:field="*{produit}" id="listeproduits" name="listeproduits" class="input-xlarge" multiple="multiple" style="width: 300px;height: 300px">
       <option th:each="produits : ${products}" 
       		  th:value="${produits.nom}" 
-      		  th:text="${produits.nom}"
-      		  th:field="*{produit}" ></option>
+      		  th:text="${produits.nom}"></option>
     </select>
 
     

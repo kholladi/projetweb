@@ -27,19 +27,16 @@ public class FactureController {
 			
 			FactureRepository.save(facture);
 			
+
+			
 			System.out.println(facture.getProduit());
+			
+			model.addAttribute("facture", FactureRepository.findAll());
+
 		
-			return "redirect:/cai";
+			return "redirect:/caisse";
 		}
 		
-		
-		@RequestMapping(value = "/cai", method = RequestMethod.GET)
-		public String facture(Model model) {
-		
-			model.addAttribute("fact", FactureRepository.findAll());
-						
-			return "/caisse";
-		}	
 
 
 		

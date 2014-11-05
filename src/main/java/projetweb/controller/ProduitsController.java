@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import projetweb.model.Facture;
 import projetweb.model.Produits;
+import projetweb.repository.FactureRepository;
 import projetweb.repository.ProduitsRepository;
 
 
@@ -19,6 +20,7 @@ public class ProduitsController {
 
 	 @Autowired
 	private ProduitsRepository ProduitsRepository;
+	private FactureRepository FactureRepository;
 	
 	@RequestMapping(value = "/accueil", method = RequestMethod.GET)
 	public String accueil(Model model) {
@@ -100,7 +102,8 @@ public class ProduitsController {
 		model.addAttribute("prod", new Produits());
 		model.addAttribute("products", ProduitsRepository.findAll());	
 		
-		model.addAttribute("factures", new Facture());
+		model.addAttribute("facture", new Facture());
+
 		
 		return "/caisse";
 	}	
