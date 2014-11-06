@@ -76,7 +76,13 @@ public class FactureController {
 		}
 		
 
-
+		@RequestMapping(value = "/deletefacture", method = RequestMethod.GET)
+		public String deleteProduct(@RequestParam("id") Long id, Model model) {
+			
+			FactureRepository.delete(id);
+			
+			return "redirect:/caisse";
+		}
 
 		
 		

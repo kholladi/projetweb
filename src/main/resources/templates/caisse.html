@@ -84,7 +84,7 @@
       <td th:text="${facture.produit}"></td>
        <td th:text="${facture.prix}"></td>
       <td> <input id="quantite" name="quantite" placeholder="quantite" class="input-xlarge" required="" type="number"/></td>
-	  <td > <span class="label label-important">delete</span>  </td>
+	   <td > <span class="label label-important"><a th:href="@{/deletefacture(id=${facture.id})}">delete</a></span>  </td>
     </tr>
   </tbody>
 </table>
