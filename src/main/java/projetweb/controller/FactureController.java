@@ -28,27 +28,34 @@ public class FactureController {
 
  
 		@RequestMapping(value = "/caisse", method = RequestMethod.GET)
-		public String caisseemploye(Model model, @ModelAttribute Produits produit) {
+		public String caisseemploye(Model model, @ModelAttribute Facture facture) {
 			model.addAttribute("prod", new Produits());
 			model.addAttribute("products", ProduitsRepository.findAll());	
 			
 			model.addAttribute("facture", new Facture());
 			
 			
-			List<Facture> l = (List<Facture>) FactureRepository.findAll();
-			if (l != null && !l.isEmpty())
-				model.addAttribute("facturess", l);
+			
+			List<Produits> listproduit = (List<Produits>) ProduitsRepository.findAll();
+			List<Facture> listfacture = (List<Facture>) FactureRepository.findAll();
 			
 			
-	/*		List<Produits> listproduit = (List<Produits>) ProduitsRepository.findAll();
-			int sizeListe=listproduit.size();
-			int i=0;
-			while(i<sizeListe){
-				System.out.println(produit.getNom());
-				i++;		
+			if (listfacture != null && !listfacture.isEmpty()){
+				model.addAttribute("facturess", listfacture);
+
+
+			for(int i=0; i<listproduit.size(); i++){
+				for(int j=0; j<listfacture.size(); j++){
+					
+					if(listproduit.get(i).getNom().equals(listfacture.get(j).getProduit()))	
+					  	listfacture.get(j).setPrix(listproduit.get(i).getPrix());
+				//facture.setPrix(listfacture.get(j).getPrix());
+				//	System.out.println(listproduit.get(i).getNom());
+				//	System.out.println(listfacture.get(j).getProduit());
+				}		
 			}
-			*/
-			
+			}
+				
 
 			return "caisse";
 		}	
@@ -61,7 +68,8 @@ public class FactureController {
 			
 			FactureRepository.save(facture);
 			
-			System.out.println(facture.getProduit());		
+			System.out.println(facture.getProduit());	
+			System.out.println(facture.getPrix());
 			
 	
 			return "redirect:/caisse";
