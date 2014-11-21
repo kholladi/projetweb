@@ -3,6 +3,8 @@ package projetweb.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +30,7 @@ public class FactureController {
 
  
 		@RequestMapping(value = "/caisse", method = RequestMethod.GET)
-		public String caisseemploye(Model model, @ModelAttribute Facture facture) {
+		public String caisseemploye(Model model, @ModelAttribute Facture facture, HttpSession session) {
 			model.addAttribute("prod", new Produits());
 			model.addAttribute("products", ProduitsRepository.findAll());	
 			
@@ -55,6 +57,8 @@ public class FactureController {
 				}		
 			}
 			}
+			
+
 				
 
 			return "caisse";
