@@ -18,7 +18,8 @@ public class Facture implements Serializable {
     private String prenomclient;
     private String produit;
     private long prix;
-    private long quantite;
+    private long quantite = 1;
+    private long total;
 
 	public Facture() {}
 

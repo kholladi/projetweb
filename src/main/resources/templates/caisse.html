@@ -37,8 +37,11 @@
       		  th:value="${produits.nom}" 
       		  th:text="${produits.nom} +'.......................'+  ${produits.prix} + 'Euro'"></option>
     </select>
-
-    
+ 
+  <div class="controls">
+  <label class="control-label" for="nom">Quantite: </label>
+    <input th:field="*{quantite}" type="number" min="1" th:value="${facture.quantite}" id="qte" name="qte" placeholder="quantite" class="input-xlarge" required="required"/>    
+  </div>
     
     <div><input type="submit" value="Ajouter" class="btn btn-success" /></div>
 </form>    
@@ -76,6 +79,7 @@
       <th>Produits</th>
        <th>prix</th>
        <th>Quantite</th>
+       <th>Total</th>
       <th>supprimer</th>
     </tr>
   </thead>
@@ -83,7 +87,8 @@
     <tr th:each="facture : ${facturess}">
       <td th:text="${facture.produit}"></td>
        <td th:text="${facture.prix}"></td>
-      <td> <input id="quantite" name="quantite" placeholder="quantite" class="input-xlarge" required="" type="number"/></td>
+      <td> <input th:value="${facture.quantite}" id="quantite" name="quantite" placeholder="quantite" class="input-xlarge" required="" type="number"/></td>
+	  <td></td>
 	   <td > <span class="label label-important"><a th:href="@{/deletefacture(id=${facture.id})}">delete</a></span>  </td>
     </tr>
   </tbody>

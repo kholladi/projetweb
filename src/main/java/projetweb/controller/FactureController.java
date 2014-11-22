@@ -58,8 +58,11 @@ public class FactureController {
 			}
 			}
 			
-
+			for(int i=0; i<listfacture.size(); i++){
 				
+				 
+					System.out.println(listfacture.get(i).getQuantite());
+			}
 
 			return "caisse";
 		}	
@@ -72,8 +75,8 @@ public class FactureController {
 			
 			FactureRepository.save(facture);
 			
-			System.out.println(facture.getProduit());	
-			System.out.println(facture.getPrix());
+			//System.out.println(facture.getProduit());	
+			//System.out.println(facture.getPrix());
 			
 	
 			return "redirect:/caisse";
