@@ -60,8 +60,8 @@ public class FactureController {
 			
 			for(int i=0; i<listfacture.size(); i++){
 				
-				 
-					System.out.println(listfacture.get(i).getQuantite());
+				 listfacture.get(i).setTotal(listfacture.get(i).getPrix()*listfacture.get(i).getQuantite());
+				 System.out.println(listfacture.get(i).getQuantite());
 			}
 
 			return "caisse";
@@ -92,7 +92,46 @@ public class FactureController {
 		}
 
 		
+		@RequestMapping(value = "/editfacture", method = RequestMethod.GET)
+		public String editForm(@RequestParam("id") Long id, Model model) {
+			
+			model.addAttribute("prod", new Produits());
+			model.addAttribute("products", ProduitsRepository.findAll());	
+			
+			model.addAttribute("facture", new Facture());
+			
+			
+			
+			List<Produits> listproduit = (List<Produits>) ProduitsRepository.findAll();
+			List<Facture> listfacture = (List<Facture>) FactureRepository.findAll();
+			
+			
+			if (listfacture != null && !listfacture.isEmpty()){
+				model.addAttribute("facturess", listfacture);
+
+
+			for(int i=0; i<listproduit.size(); i++){
+				for(int j=0; j<listfacture.size(); j++){
+					
+					if(listproduit.get(i).getNom().equals(listfacture.get(j).getProduit()))	
+					  	listfacture.get(j).setPrix(listproduit.get(i).getPrix());
+				//facture.setPrix(listfacture.get(j).getPrix());
+				//	System.out.println(listproduit.get(i).getNom());
+				//	System.out.println(listfacture.get(j).getProduit());
+				}		
+			}
+			}
+			
+			model.addAttribute("facturess", FactureRepository.findOne(id));
+						
+			return "caisse";
+		}
 		
+		@RequestMapping(value = "/editfacture", method = RequestMethod.POST)
+		public String editPost(@ModelAttribute Facture facture, Model model) {
+			FactureRepository.save(facture);
+			return "redirect:/caisse";
+		}
 		
 		
 		

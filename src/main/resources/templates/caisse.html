@@ -80,15 +80,17 @@
        <th>prix</th>
        <th>Quantite</th>
        <th>Total</th>
-      <th>supprimer</th>
+       <th>Editer</th>
+      <th>Supprimer</th>
     </tr>
   </thead>
   <tbody>
     <tr th:each="facture : ${facturess}">
       <td th:text="${facture.produit}"></td>
        <td th:text="${facture.prix}"></td>
-      <td> <input th:value="${facture.quantite}" id="quantite" name="quantite" placeholder="quantite" class="input-xlarge" required="" type="number"/></td>
-	  <td></td>
+      <td th:text="${facture.quantite}"></td>
+	  <td th:text="${facture.total}"></td>
+	  <td><a th:href="@{/editfacture(id=${facture.id})}">edit</a></td>
 	   <td > <span class="label label-important"><a th:href="@{/deletefacture(id=${facture.id})}">delete</a></span>  </td>
     </tr>
   </tbody>

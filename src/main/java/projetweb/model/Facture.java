@@ -23,12 +23,21 @@ public class Facture implements Serializable {
 
 	public Facture() {}
 
-	public Facture(String nomclient, String prenomclient, String produit, long prix, long quantite) {
+	public Facture(String nomclient, String prenomclient, String produit, long prix, long quantite, long total) {
 		this.nomclient = nomclient;
 		this.prenomclient = prenomclient;
 		this.produit = produit;
 		this.prix = prix;
 		this.quantite = quantite;
+		this.total = total;
+	}
+
+	public long getTotal() {
+		return total;
+	}
+
+	public void setTotal(long total) {
+		this.total = total;
 	}
 
 	public long getId() {
