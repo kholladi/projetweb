@@ -97,7 +97,12 @@
       <td></td>
       <td></td>
       <td></td>
-	  <td th:text="'Total: '+${somme}+'€'" style="font-weight:bold;"></td>
+	  <td style="font-weight:bold;">
+	  			<div th:switch="${somme}">
+  				<p th:case="0"></p>
+  				<p th:case="*" th:text="'Total: '+${somme}+'€'"></p>
+				</div>	
+	  </td>
 	  <td></td>
 	  <td ></td>
     </tr>
