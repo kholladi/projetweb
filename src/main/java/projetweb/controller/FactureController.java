@@ -61,9 +61,21 @@ public class FactureController {
 			for(int i=0; i<listfacture.size(); i++){
 				
 				 listfacture.get(i).setTotal(listfacture.get(i).getPrix()*listfacture.get(i).getQuantite());
-				 System.out.println(listfacture.get(i).getQuantite());
+				 System.out.println(listfacture.get(i).getQuantite());				 
 			}
-
+			
+			long somme=0;
+			for(int i=0; i<listfacture.size(); i++){
+			 somme=somme+listfacture.get(i).getTotal();
+			}
+			
+			 facture.setTtotal(somme);
+			 model.addAttribute("somme",facture.getTtotal() );	
+			 
+			 System.out.println("la somme est" +  somme);
+			 System.out.println("get  "+facture.getTtotal());
+			
+			
 			return "caisse";
 		}	
 		

@@ -20,16 +20,26 @@ public class Facture implements Serializable {
     private long prix;
     private long quantite = 1;
     private long total;
+    private long ttotal = 0;
 
 	public Facture() {}
 
-	public Facture(String nomclient, String prenomclient, String produit, long prix, long quantite, long total) {
+	public Facture(String nomclient, String prenomclient, String produit, long prix, long quantite, long total, long ttotal) {
 		this.nomclient = nomclient;
 		this.prenomclient = prenomclient;
 		this.produit = produit;
 		this.prix = prix;
 		this.quantite = quantite;
 		this.total = total;
+		this.ttotal = ttotal;
+	}
+
+	public long getTtotal() {
+		return ttotal;
+	}
+
+	public void setTtotal(long ttotal) {
+		this.ttotal = ttotal;
 	}
 
 	public long getTotal() {
