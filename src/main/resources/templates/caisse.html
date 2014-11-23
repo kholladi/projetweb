@@ -87,7 +87,7 @@
   <tbody>
     <tr th:each="facture : ${facturess}">
       <td th:text="${facture.produit}"></td>
-       <td th:text="${facture.prix}"></td>
+       <td th:text="${facture.prix}+' €'"></td>
       <td th:text="${facture.quantite}"></td>
 	  <td th:text="${facture.total}"></td>
 	  <td><a th:href="@{/editfacture(id=${facture.id})}">edit</a></td>
@@ -97,7 +97,7 @@
       <td></td>
       <td></td>
       <td></td>
-	  <td th:text="'Total: '+${somme}"></td>
+	  <td th:text="'Total: '+${somme}+'€'" style="font-weight:bold;"></td>
 	  <td></td>
 	  <td ></td>
     </tr>
