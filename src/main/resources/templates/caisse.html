@@ -57,14 +57,14 @@
 <div class="control-group">
   <label class="control-label" for="nom">Nom du client: </label>
   <div class="controls">
-    <input id="nom" name="nom" placeholder="nom" class="input-xlarge" type="text" th:field="*{nomclient}"/>    
+    <input id="nom" name="nom" placeholder="nom" required="required" class="input-xlarge" type="text" th:field="*{nomclient}"/>    
   </div>
 </div>
 <!-- Text input-->
 <div class="control-group">
   <label class="control-label" for="textinput">Prenom du client:</label>
   <div class="controls">
-    <input id="textinput" name="textinput" placeholder="Prenom" class="input-xlarge" type="text" th:field="*{prenomclient}"/>   
+    <input id="textinput" name="textinput" placeholder="Prenom" required="required" class="input-xlarge" type="text" th:field="*{prenomclient}"/>   
   </div>
 </div>
 
@@ -100,7 +100,7 @@
 	  <td style="font-weight:bold;">
 	  			<div th:switch="${somme}">
   				<p th:case="0"></p>
-  				<p th:case="*" th:text="'Total: '+${somme}+'€'"></p>
+  				<p th:case="*" th:text="'Subtotal: '+${somme}+'€'"></p>
 				</div>	
 	  </td>
 	  <td></td>

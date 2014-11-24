@@ -150,6 +150,43 @@ public class FactureController {
 		@RequestMapping(value = "/facture", method = RequestMethod.GET)
 		public String facturation(Model model, @ModelAttribute Facture facture) {
 			
+			model.addAttribute("facturesss", FactureRepository.findAll());
+			
+			List<Produits> listproduit = (List<Produits>) ProduitsRepository.findAll();
+			List<Facture> listfacture = (List<Facture>) FactureRepository.findAll();
+			
+			
+			if (listfacture != null && !listfacture.isEmpty()){
+				model.addAttribute("facturess", listfacture);
+
+
+			for(int i=0; i<listproduit.size(); i++){
+				for(int j=0; j<listfacture.size(); j++){
+					
+					if(listproduit.get(i).getNom().equals(listfacture.get(j).getProduit()))	
+					  	listfacture.get(j).setPrix(listproduit.get(i).getPrix());
+				//facture.setPrix(listfacture.get(j).getPrix());
+				//	System.out.println(listproduit.get(i).getNom());
+				//	System.out.println(listfacture.get(j).getProduit());
+				}		
+			}
+			}
+			for(int i=0; i<listfacture.size(); i++){
+				
+				 listfacture.get(i).setTotal(listfacture.get(i).getPrix()*listfacture.get(i).getQuantite());
+				 System.out.println(listfacture.get(i).getQuantite());				 
+			}
+			
+			long somme=0;
+			for(int i=0; i<listfacture.size(); i++){
+			 somme=somme+listfacture.get(i).getTotal();
+			}
+			
+			 facture.setTtotal(somme);
+			 model.addAttribute("somme",facture.getTtotal() );	
+			 
+			 System.out.println("la somme est" +  somme);
+			 System.out.println("get  "+facture.getTtotal());
 			
 			return "facture";
 		}
