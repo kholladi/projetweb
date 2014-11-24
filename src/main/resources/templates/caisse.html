@@ -14,7 +14,7 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
-<body>
+<body onload="">
 
 <div class="container">
 
@@ -30,7 +30,7 @@
 <div style="display:inline-block; width:30%;">
       <h3>Liste des produits</h3>
       
- <form action="#" th:object="${facture}" method="post" class="form-horizontal">
+ <form  onsubmit="return getSelectedOptions();" action="#" th:object="${facture}" method="post" class="form-horizontal">
    
     <select th:field="*{produit}"  id="listeproduits" name="listeproduits" class="input-xlarge" multiple="multiple" style="width: 300px;height: 300px">
       <option th:each="produits : ${products}" 
@@ -47,7 +47,46 @@
 </form>    
 </div>
 
+<script type="text/javascript">
+function getSelectedOptions(){
+	// alert('hi');
+	 var r=true;
+	var foo = document.getElementById('listeproduits');
+	if (foo)
+	{
+	   if (foo.selectedIndex == -1)
+	   {
+	     // foo.selectedIndex = 0;
+	      alert('product not selected');
+	       return false;
+	   }
+		   return true; 
+	  
+	}
+	
+	
+}
 
+</script>
+
+
+<script type="text/javascript">
+
+var table = document.getElementById("tab");
+var cells = table.getElementsByTagName('td');
+for (var i = 0, row; row = table.rows[i]; i++) {
+   //iterate through rows
+   //rows would be accessed using the "row" variable assigned in the for loop
+   for (var j = 0, col; col = row.cells[j]; j++) {
+	   
+	   cells[i].onclick = function(){
+	        console.log(this.innerHTML);
+     //iterate through columns
+     //columns would be accessed using the "col" variable assigned in the for loop
+   }  
+}
+
+</script>
 <div style="display:inline-block; width:70%; float:right;">
       <h3>Facture</h3>
       
@@ -73,7 +112,7 @@
 
 
  <div class="bs-example">
-    <table class="table table-hover">
+    <table id="tab" class="table table-hover">
   <thead>
     <tr>
       <th>Produits</th>
@@ -88,7 +127,7 @@
     <tr th:each="facture : ${facturess}">
       <td th:text="${facture.produit}"></td>
        <td th:text="${facture.prix}+' €'"></td>
-      <td th:text="${facture.quantite}"></td>
+      <td id ="id" th:text="${facture.quantite}"></td>
 	  <td th:text="${facture.total}"></td>
 	  <td><a th:href="@{/editfacture(id=${facture.id})}">edit</a></td>
 	   <td > <span class="label label-important"><a th:href="@{/deletefacture(id=${facture.id})}">delete</a></span>  </td>
