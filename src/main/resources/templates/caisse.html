@@ -51,20 +51,20 @@
 <div style="display:inline-block; width:70%; float:right;">
       <h3>Facture</h3>
       
-      <form class="form-horizontal">
+      <form action="#" th:action="@{/facture}" th:object="${facture}" class="form-horizontal">
 <fieldset>
 <!-- Text input-->
 <div class="control-group">
   <label class="control-label" for="nom">Nom du client: </label>
   <div class="controls">
-    <input id="nom" name="nom" placeholder="nom" class="input-xlarge" type="text"/>    
+    <input id="nom" name="nom" placeholder="nom" class="input-xlarge" type="text" th:field="*{nomclient}"/>    
   </div>
 </div>
 <!-- Text input-->
 <div class="control-group">
   <label class="control-label" for="textinput">Prenom du client:</label>
   <div class="controls">
-    <input id="textinput" name="textinput" placeholder="Prenom" class="input-xlarge" type="text"/>   
+    <input id="textinput" name="textinput" placeholder="Prenom" class="input-xlarge" type="text" th:field="*{prenomclient}"/>   
   </div>
 </div>
 

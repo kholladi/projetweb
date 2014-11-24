@@ -147,6 +147,13 @@ public class FactureController {
 		
 		
 		
+		@RequestMapping(value = "/facture", method = RequestMethod.GET)
+		public String facturation(Model model, @ModelAttribute Facture facture) {
+			
+			
+			return "facture";
+		}
+		
 
 
 }
