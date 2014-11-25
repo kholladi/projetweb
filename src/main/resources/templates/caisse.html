@@ -43,7 +43,12 @@
     <input th:field="*{quantite}" type="number" min="1" th:value="${facture.quantite}" id="qte" name="qte" placeholder="quantite" class="input-xlarge" required="required"/>    
   </div>
     
-    <div><input type="submit" value="Ajouter" class="btn btn-success" /></div>
+    <div th:switch="${somme}">
+     <span th:case="null" ><input type="submit" value="Modifer" class="btn btn-success" /></span>
+     <span th:case="0" ><input type="submit" value="Ajouter" class="btn btn-success" /></span>
+      <span th:case="*" ><input type="submit" value="Ajouter" class="btn btn-success" /></span>
+     
+    </div>
 </form>    
 </div>
 
@@ -115,27 +120,49 @@ function validateForm(){
 
 
 <div style="display:inline-block; width:70%; float:right;">
-      <h3>Facture</h3>
       
+     <div  th:switch="${somme}">
+   
+  				<h3 th:case="null" >Modification</h3>
+  				<h3 th:case="0" >Facture</h3>	
+                <h3 th:case="*" >Facture</h3>				
+      </div>
       <form action="#" th:action="@{/facture}" th:object="${facture}" class="form-horizontal">
 <fieldset>
 <!-- Text input-->
-<div class="control-group">
-  <label class="control-label" for="nom">Nom du client: </label>
-  <div class="controls">
-    <input id="nom" name="nom" placeholder="nom" required="required" class="input-xlarge" type="text" th:field="*{nomclient}"/>    
+<div class="control-group" th:switch="${somme}">
+   
+  				<span  th:case="null"></span>
+  				<span th:case="*" ><label class="control-label" for="nom">Nom du client: </label></span>
+				
+  
+  <div class="controls" th:switch="${somme}">
+
+  				<span  th:case="null"></span>
+  				<span th:case="*" ><input id="nom" name="nom" placeholder="nom" required="required" class="input-xlarge" type="text" th:field="*{nomclient}"/> </span>
+			
+       
   </div>
 </div>
 <!-- Text input-->
-<div class="control-group">
-  <label class="control-label" for="textinput">Prenom du client:</label>
-  <div class="controls">
-    <input id="textinput" name="textinput" placeholder="Prenom" required="required" class="input-xlarge" type="text" th:field="*{prenomclient}"/>   
-  </div>
+<div class="control-group" th:switch="${somme}">
+
+  				<span th:case="null"></span>
+  				<span th:case="*" ><label class="control-label" for="textinput">Prenom du client:</label> </span>
+					
+
+  <div class="controls" th:switch="${somme}">
+
+  				<span  th:case="null"></span>
+  				<span  th:case="*" ><input id="textinput" name="textinput" placeholder="Prenom" required="required" class="input-xlarge" type="text" th:field="*{prenomclient}"/>   </span>
+				</div>	
+ 
 </div>
 
 
-
+	<div >
+	  <h4  th:text="${MOD}"></h4>
+	</div>
 
 
  <div class="bs-example">
@@ -145,9 +172,17 @@ function validateForm(){
       <th>Produits</th>
        <th>prix</th>
        <th>Quantite</th>
-       <th>Total</th>
-       <th>Editer</th>
-      <th>Supprimer</th>
+       <th  th:switch="${somme}"><span th:case="null" ></span>
+  				<span th:case="0" >Total</span>	
+  				<span th:case="*" >Total</span></th>
+    
+       <th  th:switch="${somme}"><span th:case="null" ></span>
+  				<span th:case="0" >Editer</span>	
+  				<span th:case="*" >Editer</span></th>
+  				
+      <th  th:switch="${somme}"><span th:case="null" ></span>
+  				<span th:case="0" >Supprimer</span>	
+  				<span th:case="*" >Supprimer</span></th>
     </tr>
   </thead>
   <tbody>
@@ -155,9 +190,24 @@ function validateForm(){
       <td id="pName" th:text="${facture.produit}"></td>
        <td th:text="${facture.prix}+' €'"></td>
       <td  th:text="${facture.quantite}"></td>
-	  <td th:text="${facture.total}"></td>
-	  <td><a th:href="@{/editfacture(id=${facture.id})}">edit</a></td>
-	   <td > <span class="label label-important"><a th:href="@{/deletefacture(id=${facture.id})}">delete</a></span>  </td>
+	  <td th:switch="${somme}" >
+	  <span th:case="null" ></span>
+  				<span th:case="0" th:text="${facture.total+' €'}">Total</span>	
+  				<span th:case="*" th:text="${facture.total+' €'}">Total</span></td>
+	  <td> <span class="label label-important" >
+	   <span  th:switch="${somme}">
+   
+  				<span th:case="null" ></span>
+  				<span th:case="0" ><a th:href="@{/editfacture(id=${facture.id})}">edit</a></span>	
+  				<span th:case="*" ><a th:href="@{/editfacture(id=${facture.id})}">edit</a></span>	
+      </span> </span></td>
+    
+	   <td > <span class="label label-important" >
+      <span th:switch="${somme}" >
+	   <span th:case="null" ></span>
+  				<span th:case="0" ><a th:href="@{/deletefacture(id=${facture.id})}">delete</a></span>	
+  				<span th:case="*" ><a th:href="@{/deletefacture(id=${facture.id})}">delete</a></span>
+    </span> </span></td>
     </tr>
     <tr>
       <td></td>
@@ -166,6 +216,7 @@ function validateForm(){
 	  <td style="font-weight:bold;">
 	  			<div th:switch="${somme}">
   				<p th:case="0"></p>
+  				<p  th:case="null"></p>
   				<p th:case="*" th:text="'Subtotal: '+${somme}+'€'"></p>
 				</div>	
 	  </td>
@@ -183,7 +234,13 @@ function validateForm(){
 
 </fieldset>
 
-<div><input type="submit" value="Valider" class="btn btn-success" /></div>
+<div>
+<div th:switch="${somme}">
+  				<p th:case="0"></p>
+  				<p  th:case="null"></p>
+  				<p th:case="*" ><input type="submit" value="Valider" class="btn btn-success" /></p>
+				</div>	
+</div>
 </form>
       
       

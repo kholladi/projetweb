@@ -32,7 +32,8 @@ public class FactureController {
 			HttpSession session) {
 		model.addAttribute("prod", new Produits());
 		model.addAttribute("products", ProduitsRepository.findAll());
-
+		String pm="" ;
+		model.addAttribute("MOD", pm);
 		model.addAttribute("facture", new Facture());
 		Facture facremove = null;
 
@@ -146,8 +147,11 @@ public class FactureController {
 				}
 			}
 		}
-
+		Facture fac=FactureRepository.findOne(id);
+		String pm="Produit " +fac.getProduit();
 		model.addAttribute("facturess", FactureRepository.findOne(id));
+		model.addAttribute("MOD", pm);
+		
 
 		return "caisse";
 	}
