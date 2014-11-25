@@ -33,7 +33,9 @@ public class FactureController {
 		model.addAttribute("prod", new Produits());
 		model.addAttribute("products", ProduitsRepository.findAll());
 		String pm="" ;
+		long mid=0;
 		model.addAttribute("MOD", pm);
+		model.addAttribute("MD", mid);
 		model.addAttribute("facture", new Facture());
 		Facture facremove = null;
 
@@ -149,8 +151,18 @@ public class FactureController {
 			}
 		}
 		Facture fac=FactureRepository.findOne(id);
+		long mid=0;
+		for (int i = 0; i < listproduit.size(); i++) {
+			if(fac.getProduit().equals(listproduit.get(i).getNom())){
+				mid=listproduit.get(i).getId();
+				
+			}
+		
+		}
+
 		String pm="Produit " +fac.getProduit();
 		model.addAttribute("facturess", FactureRepository.findOne(id));
+		model.addAttribute("MD", mid);
 		model.addAttribute("MOD", pm);
 		
 

@@ -14,7 +14,7 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
-<body onload="">
+<body onload="preselected()">
 
 <div class="container">
 
@@ -30,7 +30,7 @@
 <div style="display:inline-block; width:30%;">
       <h3>Liste des produits</h3>
      
- <form  onsubmit="return validateForm();" action="#" th:object="${facture}" method="post" class="form-horizontal">
+ <form  onsubmit="return getSelectedOptions();" action="#" th:object="${facture}" method="post" class="form-horizontal">
    
     <select th:field="*{produit}"  id="listeproduits" name="listeproduits" class="input-xlarge" multiple="multiple" style="width: 300px;height: 300px">
       <option th:each="produits : ${products}" 
@@ -61,7 +61,7 @@ function getSelectedOptions(){
 	{
 	   if (foo.selectedIndex == -1)
 	   {
-	     // foo.selectedIndex = 0;
+	      //foo.selectedIndex = 0;
 	      alert('product not selected');
 	       return false;
 	   }
@@ -73,7 +73,32 @@ function getSelectedOptions(){
 }
 
 </script>
+<script type="text/javascript">
+function preselected(){
+var c=0;	
+var foo = document.getElementById('listeproduits');
+var x = document.getElementById("m").innerHTML;
+c=parseInt(x);
+if(c==0){
+//alert("blabla"+x);	
+}else{
+	if (foo)
+	{
+	   if (foo.selectedIndex == -1)
+	   {
+	     foo.selectedIndex = c-1;
+	       
+	   }
 
+
+}
+
+
+//document.getElementById("vef").innerHTML = x;
+}
+
+}
+</script>
 
 <script type="text/javascript">
 
@@ -81,6 +106,7 @@ function GetCellValues() {
 	/*<![CDATA[*/
 	 var foo = document.getElementById('listeproduits');
 	 var list = foo.value;
+	
 	if (foo)
 	{          
     var table = document.getElementById('tab');
@@ -105,8 +131,13 @@ function GetCellValues() {
 
 </script>
 <script text="text/javascript">
+/*<![CDATA[*/
+
+
+/*]]>*/
 function validateForm(){
 	/*<![CDATA[*/
+	  <       
 	  var validation = false;
        if( !getSelectedOptions()){
     	   
@@ -123,8 +154,8 @@ function validateForm(){
       
      <div  th:switch="${somme}">
    
-  				<h3 th:case="null" >Modification</h3>
-  				<h3 th:case="0" >Facture</h3>	
+  				<h3 id="vef" th:case="null" >Modification</h3>
+  				<h3  th:case="0" >Facture</h3>	
                 <h3 th:case="*" >Facture</h3>				
       </div>
       <form action="#" th:action="@{/facture}" th:object="${facture}" class="form-horizontal">
@@ -161,7 +192,9 @@ function validateForm(){
 
 
 	<div >
-	  <h4  th:text="${MOD}"></h4>
+	  <h4   th:text="${MOD}"></h4>
+	  <h4 id="m"  th:text="${MD}" style="display:none;"></h4>
+	  
 	</div>
 
 
@@ -169,10 +202,10 @@ function validateForm(){
     <table id="tab" class="table table-hover">
   <thead>
     <tr>
-      <th>Produits</th>
+      <th >Produits</th>
        <th>prix</th>
        <th>Quantite</th>
-       <th  th:switch="${somme}"><span th:case="null" ></span>
+       <th id="s"  th:switch="${somme}"><span th:case="null" ></span>
   				<span th:case="0" >Total</span>	
   				<span th:case="*" >Total</span></th>
     

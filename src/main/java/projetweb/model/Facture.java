@@ -35,6 +35,7 @@ public class Facture implements Serializable {
 		this.total = total;
 		this.ttotal = ttotal;
 	}
+	
   public void setExist(boolean exist) {
 	this.exist = exist;
 }
@@ -90,7 +91,7 @@ public class Facture implements Serializable {
 	public String getProduit() {
 		return produit;
 	}
-
+   
 	public void setProduit(String produit) {
 		this.produit = produit;
 	}
