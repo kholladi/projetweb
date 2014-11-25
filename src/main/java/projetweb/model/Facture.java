@@ -21,7 +21,7 @@ public class Facture implements Serializable {
     private long quantite = 1;
     private long total;
     private long ttotal = 0;
-
+    boolean exist;
 	public Facture() {}
 
 	public Facture(String nomclient, String prenomclient, String produit, long prix, long quantite, long total, long ttotal) {
@@ -33,7 +33,12 @@ public class Facture implements Serializable {
 		this.total = total;
 		this.ttotal = ttotal;
 	}
-
+  public void setExist(boolean exist) {
+	this.exist = exist;
+}
+  public boolean getExist() {
+		return exist;
+	}
 	public long getTtotal() {
 		return ttotal;
 	}
