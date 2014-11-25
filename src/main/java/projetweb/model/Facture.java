@@ -24,6 +24,7 @@ public class Facture implements Serializable {
     boolean exist;
     private String modif="";
 	public Facture() {}
+	
 
 	public Facture(String nomclient, String prenomclient, String produit, long prix, long quantite, long total, long ttotal) {
 		this.nomclient = nomclient;

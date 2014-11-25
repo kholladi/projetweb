@@ -50,6 +50,7 @@ public class FactureController {
 					facremove = listfacture.get(listfacture.size() - 1);
 					FactureRepository.delete(facremove);
 					 listfacture.remove(listfacture.size() - 1);
+					 
 
 				}
 			}
