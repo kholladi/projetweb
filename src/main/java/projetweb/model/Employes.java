@@ -24,9 +24,23 @@ public class Employes implements Serializable {
     private String mail;
     @NotNull
     private String mdp;
-    
+    private boolean Ath;
     
 	public Employes() {}
+
+
+
+
+	public boolean getAth() {
+		return Ath;
+	}
+
+
+
+
+	public void setAth(boolean ath) {
+		Ath = ath;
+	}
 
 
 	public Employes(String nom, String prenom, String adresse,

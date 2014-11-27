@@ -37,9 +37,11 @@
             
             <ul class="nav navbar-nav navbar-right">
             <li>
-                   <form action="#" th:action="@{/accueilemploi}" th:object="${employes}" class="navbar-form navbar-right" role="form" method="post">
-            <div class="form-group">
+                   <form action="/accueil" th:action="@{/accueilemploi}" th:object="${employes}" class="navbar-form navbar-right" role="form" method="post">
+            <div class="form-group" th:class="${#fields.hasErrors('nom')}? 'control-group input error'">
               <input placeholder="Login" class="form-control" type="text" name="login" th:field="*{nom}"/>
+               <span class="help-block" th:if="${#fields.hasErrors('nom')}"
+            th:errors="*{nom}"></span>
             </div>
             <div class="form-group">
               <input placeholder="Password" class="form-control" type="password" name="pwd" th:field="*{mdp}"/>

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import projetweb.model.Employes;
 import projetweb.model.Facture;
 import projetweb.model.Produits;
+import projetweb.repository.EmployesRepository;
 import projetweb.repository.FactureRepository;
 import projetweb.repository.ProduitsRepository;
 
@@ -27,148 +28,247 @@ public class FactureController {
 	@Autowired
 	private ProduitsRepository ProduitsRepository;
 	
-	ArrayList<Facture> facture = new ArrayList<Facture>();
-
+	@Autowired
+	private EmployesRepository EmployesRepository;
 	@RequestMapping(value = "/caisse", method = RequestMethod.GET)
 	public String caisseemploye(Model model, @ModelAttribute Facture facture,
 			HttpSession session) {
-		model.addAttribute("prod", new Produits());
-		model.addAttribute("products", ProduitsRepository.findAll());
-		String pm="" ;
-		long mid=0;
-		model.addAttribute("MOD", pm);
-		model.addAttribute("MD", mid);
-		model.addAttribute("facture", new Facture());
-		Facture facremove = null;
+		
+	
+		boolean aut=false;
+		Employes emp = (Employes)session.getAttribute("emp");
+		if(emp==null){
+      
+		}else{
+			if(emp.getAth()) {
+				model.addAttribute("prod", new Produits());
+				model.addAttribute("products", ProduitsRepository.findAll());
+				aut=true;
 
-		List<Produits> listproduit = (List<Produits>) ProduitsRepository
-				.findAll();
-		List<Facture> listfacture = (List<Facture>) FactureRepository.findAll();
+				String pm="" ;
+				long mid=0;
+				model.addAttribute("MOD", pm);
+				model.addAttribute("MD", mid);
+				model.addAttribute("facture", new Facture());
+				Facture facremove = null;
 
-		if (listfacture != null && !listfacture.isEmpty()) {
-			model.addAttribute("facturess", listfacture);
+				List<Produits> listproduit = (List<Produits>) ProduitsRepository
+						.findAll();
+				List<Facture> listfacture = (List<Facture>) FactureRepository.findAll();
 
-			for (int i = 0; i < listfacture.size(); i++) {
-				if (listfacture.get(i).getExist()) {
-					listfacture.get(i).setExist(false);
-					facremove = listfacture.get(listfacture.size() - 1);
-					FactureRepository.delete(facremove);
-					 listfacture.remove(listfacture.size() - 1);
-					 
+				if (listfacture != null && !listfacture.isEmpty()) {
+					model.addAttribute("facturess", listfacture);
 
+					for (int i = 0; i < listfacture.size(); i++) {
+						if (listfacture.get(i).getExist()) {
+							listfacture.get(i).setExist(false);
+							facremove = listfacture.get(listfacture.size() - 1);
+							FactureRepository.delete(facremove);
+							 listfacture.remove(listfacture.size() - 1);
+							 
+
+						}
+					}
+
+					for (int i = 0; i < listproduit.size(); i++) {
+						for (int j = 0; j < listfacture.size(); j++) {
+
+							if (listproduit.get(i).getNom()
+									.equals(listfacture.get(j).getProduit()))
+								listfacture.get(j)
+										.setPrix(listproduit.get(i).getPrix());
+							
+						}
+					}
 				}
-			}
 
-			for (int i = 0; i < listproduit.size(); i++) {
-				for (int j = 0; j < listfacture.size(); j++) {
+				for (int i = 0; i < listfacture.size(); i++) {
 
-					if (listproduit.get(i).getNom()
-							.equals(listfacture.get(j).getProduit()))
-						listfacture.get(j)
-								.setPrix(listproduit.get(i).getPrix());
-					// facture.setPrix(listfacture.get(j).getPrix());
-					// System.out.println(listproduit.get(i).getNom());
-					// System.out.println(listfacture.get(j).getProduit());
+					listfacture.get(i).setTotal(
+							listfacture.get(i).getPrix()
+									* listfacture.get(i).getQuantite());
+					System.out.println(listfacture.get(i).getQuantite());
 				}
+
+				long somme = 0;
+				for (int i = 0; i < listfacture.size(); i++) {
+					somme = somme + listfacture.get(i).getTotal();
+				}
+
+				facture.setTtotal(somme);
+				model.addAttribute("somme", facture.getTtotal());
+
+				System.out.println("la somme est" + somme);
+				System.out.println("get  " + facture.getTtotal());
+				
 			}
+			
+			
 		}
-
-		for (int i = 0; i < listfacture.size(); i++) {
-
-			listfacture.get(i).setTotal(
-					listfacture.get(i).getPrix()
-							* listfacture.get(i).getQuantite());
-			System.out.println(listfacture.get(i).getQuantite());
+		
+		
+		
+		
+if(aut){
+			
+			return "caisse";
+			
+		}else{
+			return "redirect:/loginemploi";
 		}
-
-		long somme = 0;
-		for (int i = 0; i < listfacture.size(); i++) {
-			somme = somme + listfacture.get(i).getTotal();
-		}
-
-		facture.setTtotal(somme);
-		model.addAttribute("somme", facture.getTtotal());
-
-		System.out.println("la somme est" + somme);
-		System.out.println("get  " + facture.getTtotal());
-
-		return "caisse";
+		
+		
 	}
 
 	@RequestMapping(value = "/caisse", method = RequestMethod.POST)
-	public String submitForm(@ModelAttribute Facture facture, Model model) {
+	public String submitForm(@ModelAttribute Facture facture, Model model,HttpSession session) {
+		boolean aut=false;
+		Employes emp = (Employes)session.getAttribute("emp");
+		if(emp==null){
+      
+		}else{
+			if(emp.getAth()) {
+				
+				aut=true;
+				
+				List<Facture> listfacture = (List<Facture>) FactureRepository.findAll();
+				for (int j = 0; j < listfacture.size(); j++) {
 
-		List<Facture> listfacture = (List<Facture>) FactureRepository.findAll();
-		for (int j = 0; j < listfacture.size(); j++) {
+					if (facture.getProduit().equals(listfacture.get(j).getProduit())) {
+						listfacture.get(j).setQuantite(listfacture.get(j).getQuantite() + facture.getQuantite());
+						listfacture.get(j).setExist(true);
+					}
 
-			if (facture.getProduit().equals(listfacture.get(j).getProduit())) {
-				listfacture.get(j).setQuantite(listfacture.get(j).getQuantite() + facture.getQuantite());
-				listfacture.get(j).setExist(true);
+				}
+
+				FactureRepository.save(facture);
+				
 			}
-
+			
+			
 		}
 
-		FactureRepository.save(facture);
 
-		// System.out.println(facture.getProduit());
-		// System.out.println(facture.getPrix());
 
-		return "redirect:/caisse";
+		
+
+		if(aut){
+			
+			return "redirect:/caisse";
+
+		
+	}else{
+		return "redirect:/loginemploi";
+	}
+	
+	
+
 	}
 
 	@RequestMapping(value = "/deletefacture", method = RequestMethod.GET)
-	public String deleteProduct(@RequestParam("id") Long id, Model model) {
+	public String deleteProduct(@RequestParam(value="id", required = false) Long id, Model model,HttpSession session) {
 
-		FactureRepository.delete(id);
+		
+		boolean aut=false;
+		Employes emp = (Employes)session.getAttribute("emp");
+		if(emp==null){
+      
+		}else{
+			if(emp.getAth()) {
+				
+				aut=true;
+				FactureRepository.delete(id);
+			}
+			
+			
+		}
 
-		return "redirect:/caisse";
+		
+		
+	
+if(aut){
+			
+				return "redirect:/caisse";
+
+			
+		}else{
+			return "redirect:/loginemploi";
+		}
+		
+		
+
 	}
 
 	@RequestMapping(value = "/editfacture", method = RequestMethod.GET)
-	public String editForm(@RequestParam("id") Long id, Model model) {
+	public String editForm(@RequestParam(value="id", required = false) Long id, Model model,HttpSession session) {
 
-		model.addAttribute("prod", new Produits());
-		model.addAttribute("products", ProduitsRepository.findAll());
+		
+		boolean aut=false;
+		Employes emp = (Employes)session.getAttribute("emp");
+		if(emp==null){
+      
+		}else{
+			if(emp.getAth()) {
+				
+				aut=true;
+				model.addAttribute("prod", new Produits());
+				model.addAttribute("products", ProduitsRepository.findAll());
 
-		model.addAttribute("facture", new Facture());
+				model.addAttribute("facture", new Facture());
 
-		List<Produits> listproduit = (List<Produits>) ProduitsRepository
-				.findAll();
-		List<Facture> listfacture = (List<Facture>) FactureRepository.findAll();
+				List<Produits> listproduit = (List<Produits>) ProduitsRepository
+						.findAll();
+				List<Facture> listfacture = (List<Facture>) FactureRepository.findAll();
 
-		if (listfacture != null && !listfacture.isEmpty()) {
-			model.addAttribute("facturess", listfacture);
+				if (listfacture != null && !listfacture.isEmpty()) {
+					model.addAttribute("facturess", listfacture);
 
-			for (int i = 0; i < listproduit.size(); i++) {
-				for (int j = 0; j < listfacture.size(); j++) {
+					for (int i = 0; i < listproduit.size(); i++) {
+						for (int j = 0; j < listfacture.size(); j++) {
 
-					if (listproduit.get(i).getNom()
-							.equals(listfacture.get(j).getProduit()))
-						listfacture.get(j)
-								.setPrix(listproduit.get(i).getPrix());
-					// facture.setPrix(listfacture.get(j).getPrix());
-					// System.out.println(listproduit.get(i).getNom());
-					// System.out.println(listfacture.get(j).getProduit());
+							if (listproduit.get(i).getNom()
+									.equals(listfacture.get(j).getProduit()))
+								listfacture.get(j)
+										.setPrix(listproduit.get(i).getPrix());
+							
+						}
+					}
 				}
-			}
-		}
-		Facture fac=FactureRepository.findOne(id);
-		long mid=0;
-		for (int i = 0; i < listproduit.size(); i++) {
-			if(fac.getProduit().equals(listproduit.get(i).getNom())){
-				mid=listproduit.get(i).getId();
+				Facture fac=FactureRepository.findOne(id);
+				long mid=0;
+				for (int i = 0; i < listproduit.size(); i++) {
+					if(fac.getProduit().equals(listproduit.get(i).getNom())){
+						mid=listproduit.get(i).getId();
+						
+					}
+				
+				}
+
+				String pm="Produit " +fac.getProduit();
+				model.addAttribute("facturess", FactureRepository.findOne(id));
+				model.addAttribute("MD", mid);
+				model.addAttribute("MOD", pm);
+				
 				
 			}
-		
+			
+			
 		}
 
-		String pm="Produit " +fac.getProduit();
-		model.addAttribute("facturess", FactureRepository.findOne(id));
-		model.addAttribute("MD", mid);
-		model.addAttribute("MOD", pm);
+
+		
+	
+if(aut){
+			
+	      return "caisse";
+
+			
+		}else{
+			return "redirect:/loginemploi";
+		}
 		
 
-		return "caisse";
+		
 	}
 
 	@RequestMapping(value = "/editfacture", method = RequestMethod.POST)
@@ -178,66 +278,79 @@ public class FactureController {
 	}
 
 	@RequestMapping(value = "/facture", method = RequestMethod.GET)
-	public String facturation(Model model, @ModelAttribute Facture facture) {
+	public String facturation(Model model, @ModelAttribute Facture facture,HttpSession session) {
 
-		model.addAttribute("facturesss", FactureRepository.findAll());
+		
+		boolean aut=false;
+		Employes emp = (Employes)session.getAttribute("emp");
+		if(emp==null){
+      
+		}else{
+			if(emp.getAth()) {
+				
+				aut=true;
+				
+				model.addAttribute("facturesss", FactureRepository.findAll());
 
-		List<Produits> listproduit = (List<Produits>) ProduitsRepository
-				.findAll();
-		List<Facture> listfacture = (List<Facture>) FactureRepository.findAll();
+				List<Produits> listproduit = (List<Produits>) ProduitsRepository
+						.findAll();
+				List<Facture> listfacture = (List<Facture>) FactureRepository.findAll();
 
-		if (listfacture != null && !listfacture.isEmpty()) {
-			model.addAttribute("facturess", listfacture);
+				if (listfacture != null && !listfacture.isEmpty()) {
+					model.addAttribute("facturess", listfacture);
 
-			for (int i = 0; i < listproduit.size(); i++) {
-				for (int j = 0; j < listfacture.size(); j++) {
+					for (int i = 0; i < listproduit.size(); i++) {
+						for (int j = 0; j < listfacture.size(); j++) {
 
-					if (listproduit.get(i).getNom()
-							.equals(listfacture.get(j).getProduit()))
-						listfacture.get(j)
-								.setPrix(listproduit.get(i).getPrix());
-					// facture.setPrix(listfacture.get(j).getPrix());
-					// System.out.println(listproduit.get(i).getNom());
-					// System.out.println(listfacture.get(j).getProduit());
+							if (listproduit.get(i).getNom()
+									.equals(listfacture.get(j).getProduit()))
+								listfacture.get(j)
+										.setPrix(listproduit.get(i).getPrix());
+							
+						}
+					}
 				}
+				for (int i = 0; i < listfacture.size(); i++) {
+
+					listfacture.get(i).setTotal(
+							listfacture.get(i).getPrix()
+									* listfacture.get(i).getQuantite());
+					System.out.println(listfacture.get(i).getQuantite());
+				}
+
+				long somme = 0;
+				for (int i = 0; i < listfacture.size(); i++) {
+					somme = somme + listfacture.get(i).getTotal();
+				}
+
+				facture.setTtotal(somme);
+				model.addAttribute("somme", facture.getTtotal());
+
+				System.out.println("la somme est" + somme);
+				System.out.println("get  " + facture.getTtotal());
+				
+				
+				
+				
 			}
-		}
-		for (int i = 0; i < listfacture.size(); i++) {
-
-			listfacture.get(i).setTotal(
-					listfacture.get(i).getPrix()
-							* listfacture.get(i).getQuantite());
-			System.out.println(listfacture.get(i).getQuantite());
+			
+			
 		}
 
-		long somme = 0;
-		for (int i = 0; i < listfacture.size(); i++) {
-			somme = somme + listfacture.get(i).getTotal();
-		}
-
-		facture.setTtotal(somme);
-		model.addAttribute("somme", facture.getTtotal());
-
-		System.out.println("la somme est" + somme);
-		System.out.println("get  " + facture.getTtotal());
-
-	//	this.facture.add((Facture) listfacture);
-		
-		
-
-		return "facture";
-	}
 	
-	@RequestMapping(value = "/historique", method = RequestMethod.GET)
-	public String historique(Model model, @ModelAttribute Facture facture) {
 		
-		model.addAttribute("facturessss", FactureRepository.findAll());
+	
+if(aut){
+			
+	return "facture";
+
+			
+		}else{
+			return "redirect:/loginemploi";
+		}
+		
 
 		
-		
-		
-		return "/historique";
 	}
-	
 
 }

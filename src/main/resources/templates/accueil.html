@@ -20,11 +20,22 @@
 
      <div th:include="/header :: header"></div>  
      
+      
+<ul class="nav navbar-nav navbar-right">
+            <li>
+                   <form action="/accueilemploi" th:action="@{/singout}"  class="navbar-form navbar-right" role="form" method="post">
+           
+            <button type="submit" class="btn btn-success">Sign out</button>
+          </form>      
+            </li>                   
+          </ul>
+          
+          
      
 
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-        <h1 th:text="${employes}">Caisse en ligne</h1>
+        <h1 th:text="${session.emp.nom}">Caisse en ligne</h1>
         <p></p>
       </div>
     </div>
