@@ -9,7 +9,14 @@
 
 	<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"></link>
-</head>
+	
+	<style type="text/css" media="print">
+    #impression{
+    display : none;
+				}
+	</style>
+	
+	</head>
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -24,8 +31,82 @@
 
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-        <h1>Caisse en ligne</h1>
-        <p></p>
+      
+     <form action="#" method="post" class="form-horizontal">
+    <select id="listeproduits" name="listeproduits" class="input-xlarge" multiple="multiple" style="width: 300px;height: 300px">
+      <option th:each="fact : ${facturessss}" 
+      		  th:text="${fact.nomclient}"></option>
+    </select>
+ 
+    <div>
+     <input type="submit" value="Consulter" class="btn btn-success" />
+    </div>
+   
+    </form>
+      
+      <div class="container" th:object="${facture}">
+
+		
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="text-center"><strong>Facture</strong></h3>
+                    <h5 class="text-center"><strong th:text="'Mr. '+${facture.nomclient}+'  '+${facture.prenomclient}"> </strong></h5>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <td><strong>Produits</strong></td>
+                                    <td class="text-center"><strong>Prix</strong></td>
+                                    <td class="text-center"><strong>Quantite</strong></td>
+                                    <td class="text-right"><strong>Total</strong></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="facture : ${facturesss}">
+                                    <td th:text="${facture.produit}"></td>
+                                    <td class="text-center" th:text="${facture.prix}+' €'"></td>
+                                    <td class="text-center" th:text="${facture.quantite}"></td>
+                                    <td class="text-right" th:text="${facture.total}+' €'"></td>
+                                </tr>
+                                <tr>
+                                    <td class="highrow"></td>
+                                    <td class="highrow"></td>
+                                    <td class="highrow text-center"><strong>Subtotal</strong></td>
+                                    <td class="highrow text-right" th:text="${somme}+' €'"></td>
+                                </tr>
+                                <tr>
+                                    <td class="emptyrow"></td>
+                                    <td class="emptyrow"></td>
+                                    <td class="emptyrow text-center"><strong>Tva</strong></td>
+                                    <td class="emptyrow text-right">$20</td>
+                                </tr>
+                                <tr>
+                                    <td class="emptyrow"><i class="fa fa-barcode iconbig"></i></td>
+                                    <td class="emptyrow"></td>
+                                    <td class="emptyrow text-center"><strong>Total</strong></td>
+                                    <td class="emptyrow text-right">$978.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <form>
+  						<input id="impression" name="impression" type="button" onclick="imprimer_page()" value="Imprimer cette page" />
+					</form>
+                </div>
+            </div>
+
+</div>
+      
+      
+ <script type="text/javascript">
+function imprimer_page(){
+  window.print();
+}
+</script>
+      
+
       </div>
     </div>
     

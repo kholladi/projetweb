@@ -26,6 +26,8 @@ public class FactureController {
 	private FactureRepository FactureRepository;
 	@Autowired
 	private ProduitsRepository ProduitsRepository;
+	
+	ArrayList<Facture> facture = new ArrayList<Facture>();
 
 	@RequestMapping(value = "/caisse", method = RequestMethod.GET)
 	public String caisseemploye(Model model, @ModelAttribute Facture facture,
@@ -219,7 +221,23 @@ public class FactureController {
 		System.out.println("la somme est" + somme);
 		System.out.println("get  " + facture.getTtotal());
 
+	//	this.facture.add((Facture) listfacture);
+		
+		
+
 		return "facture";
 	}
+	
+	@RequestMapping(value = "/historique", method = RequestMethod.GET)
+	public String historique(Model model, @ModelAttribute Facture facture) {
+		
+		model.addAttribute("facturessss", FactureRepository.findAll());
+
+		
+		
+		
+		return "/historique";
+	}
+	
 
 }

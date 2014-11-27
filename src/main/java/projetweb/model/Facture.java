@@ -1,6 +1,7 @@
 package projetweb.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,6 +24,7 @@ public class Facture implements Serializable {
     private long ttotal = 0;
     boolean exist;
     private String modif="";
+    
 	public Facture() {}
 	
 
