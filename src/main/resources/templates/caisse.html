@@ -27,16 +27,25 @@
         <h1>Caisse en ligne</h1>
 
 
-<div style="display:inline-block; width:30%;">
+<div>
       <h3>Liste des produits</h3>
      
  <form  onsubmit="return getSelectedOptions();" action="#" th:object="${facture}" method="post" class="form-horizontal">
    
-    <select th:field="*{produit}"  id="listeproduits" name="listeproduits" class="input-xlarge" multiple="multiple" style="width: 300px;height: 300px">
-      <option th:each="produits : ${products}" 
+   <div style="display:inline-block;">
+    <select th:field="*{produit}"  id="listeproduits" name="listeproduits" class="input-xlarge" multiple="multiple" style="width: 120px;height: 300px">
+      <option th:each="produits : ${products}"  
       		  th:value="${produits.nom}" 
-      		  th:text="${produits.nom} +'.......................'+  ${produits.prix} + 'Euro'"></option>
+      		  th:text="${produits.nom}"></option>
     </select>
+      <select id="listeproduits" name="listeproduits" class="input-xlarge" multiple="multiple" style="width: 120px;height: 300px">
+      <option th:each="produits : ${products}" disabled="disabled"
+      		  th:value="${produits.nom}"
+      		  th:text="${produits.prix} + ' €'"></option>
+    </select>
+    
+    </div>
+    
  
   <div class="controls">
   <label class="control-label" for="nom">Quantite: </label>
@@ -150,7 +159,7 @@ function validateForm(){
 </script>
 
 
-<div style="display:inline-block; width:70%; float:right;">
+<div>
       
      <div  th:switch="${somme}">
    

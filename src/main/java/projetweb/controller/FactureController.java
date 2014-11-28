@@ -330,6 +330,10 @@ if(aut){
 				System.out.println("get  " + facture.getTtotal());
 				
 				
+				long totaltva = 0;
+				totaltva = (long) (somme + (somme * 19.6/100));
+				model.addAttribute("totaltva", totaltva);
+				
 				
 				
 			}
