@@ -21,7 +21,9 @@
 <div class="container">
  
       <!-- Static navbar -->
-  		<div th:include="/admin/header :: header"></div>
+  		      <!-- Static navbar -->
+  	  <div th:if=" ${#httpServletRequest.remoteUser} == null"  th:include="/admin/header :: header"></div>        
+      <div th:if=" ${#httpServletRequest.remoteUser} != null" th:include="/admin/header_adm :: header_adm"></div> 
   		
  <!-- 
      <div  th:switch="${produits.id}">

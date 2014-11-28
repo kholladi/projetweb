@@ -26,7 +26,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/accueil">Accueil Administrateur</a>
+            <a class="navbar-brand" href="#">Administrateur</a>
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -45,7 +45,14 @@
             <div class="form-group">
               <input placeholder="Password" class="form-control" type="password" name="pwd"/>
             </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
+            <button type="submit" class="btn btn-success">Sign in</button> <br/>
+            	<span th:if="${param.error}">
+          			<font color="red">  nom d'utilisateur ou mot de passe incorrect </font>
+      		    </span>
+       			<span th:if="${param.logout}">
+          			  You have been logged out.
+      			</span>
+            	
           </form>      
             </li>                    
           </ul>
@@ -59,15 +66,18 @@
          
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-        <h1>Caisse en ligne</h1>
-        
-        		<div th:if="${param.error}">
-          			  Invalid username and password.
-      		    </div>
-       			<div th:if="${param.logout}">
-          			  You have been logged out.
-      			</div>
-
+       
+  <div class="col-xs-9 col-lg-7">      
+  <h2>Gestion des produits</h2>
+    <img src="https://imageshack.com/i/paaTp1xvj" style="width:600px;height:300px"/>
+  <p><a class="btn btn-default" href="/prod" role="button">Produits »</a></p>
+     </div>
+     <div class="col-xs-8 col-lg-6">  
+   <h2>Gestion des employees</h2>
+   <img src="https://imageshack.com/i/pbMF7mWjj" style="width:600px;height:300px"/>
+  <p><a class="btn btn-default" href="/employes" role="button">Employes »</a></p>         
+        </div>
+        		
       </div>
       
       

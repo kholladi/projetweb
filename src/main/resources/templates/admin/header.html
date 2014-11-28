@@ -9,7 +9,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/accueil">Administrateur</a>
+            <a class="navbar-brand" href="#">Administrateur</a>
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -19,7 +19,11 @@
             
             
             <ul class="nav navbar-nav navbar-right">
-            <li><a href="/ac">Login</a></li>                   
+            <li>
+            		<form  action ="/acl" class="navbar-form navbar-right" role="form" th:action="@{/ac}" method="post">
+            		
+           <button type="submit" class="btn btn-success">Login</button>
+          </form> </li>                   
           </ul>
           
           
