@@ -25,16 +25,12 @@ public class ProduitsController {
 	 @Autowired
 	 private FactureRepository FactureRepository;
 	
-	@RequestMapping(value = "/accueil", method = RequestMethod.GET)
-	public String accueil(Model model) {
-		//model.addAttribute("produits", new Produits());
-		return "/admin/accueil";
-	}
+
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String accueilr(Model model) {
 		//model.addAttribute("produits", new Produits());
-		return "/admin/accueil";
+		return "redirect:/ac";
 	}
 	
 	

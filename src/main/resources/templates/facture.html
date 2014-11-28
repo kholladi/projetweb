@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head  id="impression">
     <title>Caisse</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     
@@ -75,10 +75,15 @@
 					</form>
                 </div>
             </div>
-
+ <form th:action="@{/vider}"  class="navbar-form navbar-right" role="form" method="post">
+           
+            <button id="impression"  type="submit" class="btn btn-danger">Retour</button>
+          </form>  
 </div>
 
 
+     
+      
 
 <script type="text/javascript">
 function imprimer_page(){

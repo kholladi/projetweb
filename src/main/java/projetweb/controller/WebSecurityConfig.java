@@ -20,13 +20,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		 
 	
-		http.authorizeRequests().antMatchers("/","/accueil","/accueilemploi","/historique","/caisse","/loginemploi","/index","/cai","/deletefacture","/editfacture","/facture","/singout").permitAll()
+		http.authorizeRequests().antMatchers("/","/accueilemploi","/historique","/caisse","/loginemploi","/index","/cai","/deletefacture","/editfacture","/facture","/singout","/vider").permitAll()
 				.anyRequest().authenticated();
 		http.csrf().disable();
 
 		http.formLogin().loginPage("/login").usernameParameter("login")
 				.passwordParameter("pwd").permitAll().and().logout()
-				.logoutUrl("/bye").logoutSuccessUrl("/accueil");
+				.logoutUrl("/bye").logoutSuccessUrl("/ac");
 	}
 
 

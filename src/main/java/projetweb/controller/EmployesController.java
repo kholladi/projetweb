@@ -22,9 +22,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 
-import projetweb.model.Employes;
-import projetweb.repository.EmployesRepository;
 
+import projetweb.model.Employes;
+import projetweb.model.Facture;
+import projetweb.repository.EmployesRepository;
+import projetweb.repository.FactureRepository;
 
 @Controller
 public class EmployesController {
@@ -32,8 +34,8 @@ public class EmployesController {
 	@Autowired
 	private EmployesRepository EmployesRepository;
 
-
-	
+	@Autowired
+	FactureRepository FactureRepository;
 	
 	@RequestMapping(value = "/createemploye", method = RequestMethod.POST)
 	public String submitFormemploye(@ModelAttribute Employes Employes,HttpSession session, Model model) {
@@ -191,14 +193,15 @@ boolean exist=false;
 	      
 			}else{
 				emp.setAth(false);
-				
-				  System.out.println("je suis diférent"+emp.getNom());
-				  System.out.println(""+emp.getAth());
+			
 					session.setAttribute("emp", emp);
 			}
 		
 			
-		
+			List<Facture> listfacture = (List<Facture>) FactureRepository.findAll();
+			for(int i=0;i<listfacture.size();i++){
+				FactureRepository.delete(listfacture.get(i));
+			}
 	   
 	   
 	    return "redirect:/loginemploi";

@@ -25,9 +25,9 @@
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
         <h1>Caisse en ligne</h1>
+	</div>
 
-
-<div>
+<div style="display:inline-block; width:30%;">
       <h3>Liste des produits</h3>
      
  <form  onsubmit="return getSelectedOptions();" action="#" th:object="${facture}" method="post" class="form-horizontal">
@@ -56,9 +56,16 @@
      <span th:case="null" ><input type="submit" value="Modifer" class="btn btn-success" /></span>
      <span th:case="0" ><input type="submit" value="Ajouter" class="btn btn-success" /></span>
       <span th:case="*" ><input type="submit" value="Ajouter" class="btn btn-success" /></span>
+      
      
     </div>
-</form>    
+</form> 
+<form th:action="@{/caisse}"   role="form" >
+        <div th:switch="${somme}">
+           <span th:case="null" ><button type="submit" class="btn btn-danger">Annuler</button></span>
+       </div>
+           
+          </form>     
 </div>
 
 <script type="text/javascript">
@@ -159,7 +166,7 @@ function validateForm(){
 </script>
 
 
-<div>
+<div style="display:inline-block; width:70%; float:right;">
       
      <div  th:switch="${somme}">
    
@@ -286,12 +293,7 @@ function validateForm(){
 </div>
 </form>
       
-      
-      
-      
-      
-      
-      
+
       
 </div>
    
@@ -300,14 +302,14 @@ function validateForm(){
 
 
 
+   <!-- pied de page -->
+    <div th:include="/footer :: footer"></div>
 
 
 
 
 
 
-
-    </div>
    
  </div>
  

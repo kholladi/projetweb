@@ -27,15 +27,15 @@
      
 
       <!-- Main component for a primary marketing message or call to action -->
-      <span class="jumbotron">
+      <div class="jumbotron">
         <h3 th:text="'Session de '+${session.emp.nom}"></h3>
-      </span>
-        <div class="col-xs-9 col-lg-7">      
+     
+        <div>      
   <h2>Caisse</h2>
     <img src="https://imageshack.com/i/idZUlEEEj" style="width:600px;height:300px"/>
   <p><a class="btn btn-default" href="/caisse" role="button">Caisse »</a></p>
      </div>
-     <div class="col-xs-8 col-lg-6">  
+     <div>  
    <h2>Historiques des clients</h2>
    <img src="https://imageshack.com/i/pcc9pExVj" style="width:600px;height:300px"/>
   <p><a class="btn btn-default" href="/historique" role="button">Historique »</a></p>         
@@ -43,7 +43,7 @@
       
       
       
-      
+       </div>
       
       
     </div>

@@ -356,5 +356,13 @@ if(aut){
 
 		
 	}
+	@RequestMapping(value = "/vider", method = RequestMethod.POST)
+	public String videPost(@ModelAttribute Facture facture, Model model) {
+		List<Facture> listfacture = (List<Facture>) FactureRepository.findAll();
+		for(int i=0;i<listfacture.size();i++){
+			FactureRepository.delete(listfacture.get(i));
+		}
+		return "redirect:/caisse";
+	}
 
 }
