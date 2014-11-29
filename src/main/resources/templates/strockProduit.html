@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Accueil</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+    <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"></link>
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"></link>
+</head>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+<body>
+
+<div class="container">
+
+     <div th:include="/header :: header"></div>  
+     
+      
+
+          
+          
+     
+
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <h4 th:text="'Quantité disponible le produit  '+${pro}+' est : '+${quan}"></h4>
+        
+<form th:action="@{/caisse}"   role="form" >
+         <div> 
+
+           <span  ><button type="submit" class="btn btn-danger">Retour</button></span>
+       
+           </div>
+          </form>     
+            
+
+        
+      
+      
+      
+      
+       </div>
+      
+      
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+<!-- /container -->
+<!--Bootstrap core JavaScript-->
+<!--Placed at the end of the document so the pages lo…-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="../../dist/js/bootstrap.min.js"></script>
+<!--IE10 viewport hack for Surface/desktop Windows 8 …-->
+<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+
+</body>
+</html>

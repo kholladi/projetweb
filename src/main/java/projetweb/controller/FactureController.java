@@ -64,11 +64,15 @@ public class FactureController {
 
 					for (int i = 0; i < listfacture.size(); i++) {
 						if (listfacture.get(i).getExist()) {
-							listfacture.get(i).setExist(false);
+						
+							
 							facremove = listfacture.get(listfacture.size() - 1);
-							FactureRepository.delete(facremove);
+							 FactureRepository.delete(facremove);
+							 FactureRepository.delete(listfacture.get(i));
+						listfacture.get(i).setExist(false);
+							 FactureRepository.save(listfacture.get(i));
 							 listfacture.remove(listfacture.size() - 1);
-							 
+							 System.out.println("supprimer");
 
 						}
 					}
@@ -142,7 +146,7 @@ if(aut){
 				
 				
 
-				facture.setStock(false);
+				
    for (int j = 0; j < listpr.size(); j++) {
 					
 					if (facture.getProduit().equals(listpr.get(j).getNom())) {
@@ -163,11 +167,17 @@ if(aut){
 				for (int j = 0; j < listfacture.size(); j++) {
 					
 					if (facture.getProduit().equals(listfacture.get(j).getProduit())) {
-					
-						
+					     //facture.setQuantite(listfacture.get(j).getQuantite());
+						if(stock){
+							
+						}else{
+						FactureRepository.delete(listfacture.get(j));
 						
 						listfacture.get(j).setQuantite(listfacture.get(j).getQuantite() + facture.getQuantite());
+						
 						listfacture.get(j).setExist(true);
+						FactureRepository.save(listfacture.get(j));}
+						
 					}
 
 				}
@@ -216,8 +226,9 @@ if(aut){
 
 	@RequestMapping(value = "/deletefacture", method = RequestMethod.GET)
 	public String deleteProduct(@RequestParam(value="id", required = false) Long id, Model model,HttpSession session) {
-
-		
+		Facture fac=FactureRepository.findOne(id);
+		List<Facture> listfacture = (List<Facture>) FactureRepository.findAll();
+		List<Produits> listpr = (List<Produits>) ProduitsRepository.findAll();
 		boolean aut=false;
 		Employes emp = (Employes)session.getAttribute("emp");
 		if(emp==null){
@@ -227,6 +238,18 @@ if(aut){
 				
 				aut=true;
 				FactureRepository.delete(id);
+   for (int j = 0; j < listpr.size(); j++) {
+					
+					if (fac.getProduit().equals(listpr.get(j).getNom())) {
+						if(listpr.get(j).getQuantite()<=0){
+							listpr.get(j).setQuantite(0);
+						}else{
+						listpr.get(j).setQuantite(listpr.get(j).getQuantite()+fac.getQuantite());
+						}
+						ProduitsRepository.delete(listpr.get(j));
+						ProduitsRepository.save(listpr.get(j));
+					}
+}
 			}
 			
 			
@@ -419,13 +442,20 @@ if(aut){
 		List<Produits> listpr = (List<Produits>) ProduitsRepository.findAll();
 
 		for (int i = 0; i < listfacture.size(); i++) {
+			if(listfacture.get(i).getExist()){
+				
+		   FactureRepository.delete(listfacture.get(i));
+			listfacture.get(i).setExist(false);
+			FactureRepository.save(listfacture.get(i));}
 			if(!listfacture.get(i).getStock()){
 				for (int j = 0; j < listpr.size(); j++) {
                 if(listfacture.get(i).getProduit().equals(listpr.get(j).getNom())){
-				System.out.println("kkkkkkkk");
+				
 				model.addAttribute("quan", listpr.get(j).getQuantite());
 				model.addAttribute("pro", listpr.get(j).getNom());	
-				FactureRepository.delete(listfacture.get(i));
+				FactureRepository.delete(listfacture.get(listfacture.size()-1));
+				
+				
 				}}
 				
 				
