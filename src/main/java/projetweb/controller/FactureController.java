@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -121,8 +124,13 @@ if(aut){
 	}
 
 	@RequestMapping(value = "/caisse", method = RequestMethod.POST)
-	public String submitForm(@ModelAttribute Facture facture, Model model,HttpSession session) {
+	public String submitForm(@ModelAttribute @Valid Facture facture, Model model,HttpSession session,BindingResult bindingResult) {
+		List<Facture> listfacture = (List<Facture>) FactureRepository.findAll();
+		List<Produits> listpr = (List<Produits>) ProduitsRepository.findAll();
 		boolean aut=false;
+		boolean stock=false;
+		long Quan = 0;
+		String pro = null;
 		Employes emp = (Employes)session.getAttribute("emp");
 		if(emp==null){
       
@@ -131,17 +139,40 @@ if(aut){
 				
 				aut=true;
 				
-				List<Facture> listfacture = (List<Facture>) FactureRepository.findAll();
-				for (int j = 0; j < listfacture.size(); j++) {
+				
+				
 
+				facture.setStock(false);
+   for (int j = 0; j < listpr.size(); j++) {
+					
+					if (facture.getProduit().equals(listpr.get(j).getNom())) {
+						
+						if(facture.getQuantite()>listpr.get(j).getQuantite()){
+							stock=true;
+							facture.setStock(false);
+							ObjectError error = new ObjectError("quantite","Stock épuisé");
+							bindingResult.addError(error);
+							bindingResult.rejectValue("quantite", "error.user", "Stock épuisé");
+							facture.setStock(false);
+							System.out.println("llsdjfs");
+							
+						}}
+   }
+				
+				
+				for (int j = 0; j < listfacture.size(); j++) {
+					
 					if (facture.getProduit().equals(listfacture.get(j).getProduit())) {
+					
+						
+						
 						listfacture.get(j).setQuantite(listfacture.get(j).getQuantite() + facture.getQuantite());
 						listfacture.get(j).setExist(true);
 					}
 
 				}
 
-				FactureRepository.save(facture);
+				
 				
 			}
 			
@@ -150,17 +181,35 @@ if(aut){
 
 
 
-		
+		if(aut & stock){
+			
+			
+			FactureRepository.save(facture);
+			return "redirect:/strockProduit";
+			
+		}else{
 
 		if(aut){
-			
+			 for (int j = 0; j < listpr.size(); j++) {
+					
+					if (facture.getProduit().equals(listpr.get(j).getNom())) {
+						if(listpr.get(j).getQuantite()<=0){
+							listpr.get(j).setQuantite(0);
+						}else{
+						listpr.get(j).setQuantite(listpr.get(j).getQuantite()-facture.getQuantite());
+						}
+						ProduitsRepository.delete(listpr.get(j));
+						ProduitsRepository.save(listpr.get(j));
+					}
+}
+			FactureRepository.save(facture);
 			return "redirect:/caisse";
 
 		
 	}else{
 		return "redirect:/loginemploi";
 	}
-	
+		}
 	
 
 	}
@@ -363,6 +412,30 @@ if(aut){
 			FactureRepository.delete(listfacture.get(i));
 		}
 		return "redirect:/caisse";
+	}
+	@RequestMapping(value = "/strockProduit", method = RequestMethod.GET)
+	public String stock(@ModelAttribute Facture facture, Model model) {
+		List<Facture> listfacture = (List<Facture>) FactureRepository.findAll();
+		List<Produits> listpr = (List<Produits>) ProduitsRepository.findAll();
+
+		for (int i = 0; i < listfacture.size(); i++) {
+			if(!listfacture.get(i).getStock()){
+				for (int j = 0; j < listpr.size(); j++) {
+                if(listfacture.get(i).getProduit().equals(listpr.get(j).getNom())){
+				System.out.println("kkkkkkkk");
+				model.addAttribute("quan", listpr.get(j).getQuantite());
+				model.addAttribute("pro", listpr.get(j).getNom());	
+				FactureRepository.delete(listfacture.get(i));
+				}}
+				
+				
+				
+			}
+		}
+		
+		
+		
+		return "strockProduit";
 	}
 
 }

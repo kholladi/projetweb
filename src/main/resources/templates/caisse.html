@@ -30,7 +30,7 @@
 <div style="display:inline-block; width:30%;">
       <h3>Liste des produits</h3>
      
- <form  onsubmit="return getSelectedOptions();" action="#" th:object="${facture}" method="post" class="form-horizontal">
+ <form  onsubmit="return getSelectedOptions();"  th:object="${facture}" method="post" class="form-horizontal">
    
    <div style="display:inline-block;">
     <select th:field="*{produit}"  id="listeproduits" name="listeproduits" class="input-xlarge" multiple="multiple" style="width: 120px;height: 300px">
@@ -47,9 +47,10 @@
     </div>
     
  
-  <div class="controls">
+  <div class="controls" th:class="${#fields.hasErrors('quantite')}? 'control-group input error'">
   <label class="control-label" for="nom">Quantite: </label>
-    <input th:field="*{quantite}" type="number" min="1" th:value="${facture.quantite}" id="qte" name="qte" placeholder="quantite" class="input-xlarge" required="required"/>    
+    <input th:field="*{quantite}" type="number" min="1" th:value="${facture.quantite}" id="qte" name="qte" placeholder="quantite" class="input-xlarge" required="required"/> 
+    <span class="help-block" th:if="${#fields.hasErrors('quantite')}" th:errors="*{quantite}"></span>   
   </div>
     
     <div th:switch="${somme}">

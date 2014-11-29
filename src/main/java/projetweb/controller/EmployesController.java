@@ -122,17 +122,12 @@ boolean exist=false;
 		int sizeListe=listemploi.size();
 		int i=0;
 		while(i<sizeListe && exist==false){
-		//for(int i=0;i<sizeListe;i++){
-			// System.out.println(employes.getNom());
-			  // System.out.println(listemploi.get(i).getNom());
+		
 			   if(employes.getNom().equals(listemploi.get(i).getNom()) & employes.getMdp().equals(listemploi.get(i).getMdp()) ){
 				   System.out.println(employes.getNom());
 				   System.out.println(listemploi.get(i).getNom());
 	        		model.addAttribute("employes", employes.getNom());
-	        		//EmployesRepository.delete(listemploi.get(i));
-	        	//	listemploi.get(i).setAth(true);
-	        		
-	        	//	EmployesRepository.save(listemploi.get(i));
+	        	
 	        		employes.setAth(true);
 	        		emp=employes;
 	        		session.setAttribute("emp", emp);

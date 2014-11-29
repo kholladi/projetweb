@@ -24,7 +24,17 @@ public class Facture implements Serializable {
     private long ttotal = 0;
     boolean exist;
     private String modif="";
-    
+    boolean stock;
+	public boolean getStock() {
+		return stock;
+	}
+
+
+	public void setStock(boolean stock) {
+		this.stock = stock;
+	}
+
+
 	public Facture() {}
 	
 
